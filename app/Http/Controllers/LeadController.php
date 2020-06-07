@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Contact;
-use App\title;
+use App\Title;
 use App\City;
 use App\Country;
 use App\Nationality;
