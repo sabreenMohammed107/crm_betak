@@ -15,6 +15,7 @@ class CreateReachSourcesTable extends Migration
     {
         Schema::create('reach_sources', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('company_id')->unsigned()->nullable();
             $table->string('name')->nullable();
             $table->timestamps();
         });

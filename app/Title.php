@@ -7,6 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 class Title extends Model
 {
     protected $fillable = [
-        'name',
+        'name','company_id'
     ];
 }

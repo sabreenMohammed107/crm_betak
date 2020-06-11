@@ -19,7 +19,11 @@ class TitlesController extends Controller
     public function __construct(Title $object)
     {
         $this->middleware('auth'); 
-        $this->object = $object;
+        //get user
+       $this->middleware(function ($request, $next) {
+           $this->user = auth()->user();
+           return $next($request);
+       });        $this->object = $object;
         $this->viewName = 'titles.';
         $this->routeName = 'titles.';
         $this->message = 'The Data has been saved';
@@ -33,7 +37,7 @@ class TitlesController extends Controller
      */
     public function index()
     {
-        $data = $this->object::all();
+        $data = $this->object::where('company_id', '=', $this->user->company_id)->get();
 
         return view($this->viewName.'index', compact('data'));
     }
@@ -59,8 +63,11 @@ class TitlesController extends Controller
         $request->validate([
             'name' => 'required'
             ]);
-  
-        Title::create($request->all());
+            $input=[];
+            $input['name'] = $request->input('name');
+            $input['company_id'] = $this->user->company_id;
+    
+        Title::create($input);
    
         return redirect()->route($this->routeName.'index')->with('flash_success', $this->message);
     }
@@ -103,7 +110,9 @@ class TitlesController extends Controller
             'name' => 'required',
         ]);
 
-        $input = $request->all();
+        $input=[];
+        $input['name'] = $request->input('name');
+        $input['company_id'] = $this->user->company_id;
 
         $this->object::findOrFail($id)->update($input);
 

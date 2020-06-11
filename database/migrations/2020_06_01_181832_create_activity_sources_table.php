@@ -15,6 +15,7 @@ class CreateActivitySourcesTable extends Migration
     {
         Schema::create('activity_sources', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('company_id')->unsigned()->nullable();
             $table->string('name')->nullable();
             $table->timestamps();
         });

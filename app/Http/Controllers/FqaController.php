@@ -19,7 +19,11 @@ class FqaController extends Controller
     public function __construct(Faq $object)
     {
         $this->middleware('auth'); 
-        $this->object = $object;
+        //get user
+       $this->middleware(function ($request, $next) {
+           $this->user = auth()->user();
+           return $next($request);
+       });        $this->object = $object;
         $this->viewName = 'fqa.';
         $this->routeName = 'fqa.';
         $this->message = 'The Data has been saved';
@@ -31,7 +35,7 @@ class FqaController extends Controller
      */
     public function index()
     {
-        $data = $this->object::all();
+        $data = $this->object::where('company_id', '=', $this->user->company_id)->get();
 
         return view($this->viewName.'index', compact('data'));
     }
@@ -60,8 +64,14 @@ class FqaController extends Controller
             'answer' => 'required'
 
             ]);
-  
-            Faq::create($request->all());
+           
+            Faq::create([
+                'question' => request('question'),
+                'answer' => request('answer'),
+             'company_id' => $this->user->company_id,
+
+               
+            ]);
    
         return redirect()->route($this->routeName.'index')->with('flash_success', $this->message);
     }
@@ -106,6 +116,8 @@ class FqaController extends Controller
         ]);
 
         $input = $request->all();
+        $input['company_id']=$this->user->company_id;
+
 
         $this->object::findOrFail($id)->update($input);
 

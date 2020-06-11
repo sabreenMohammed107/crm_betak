@@ -15,6 +15,7 @@ class CreateTodoStatusesTable extends Migration
     {
         Schema::create('todo_statuses', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('company_id')->unsigned()->nullable();
             $table->string('todo_status')->nullable();
             $table->timestamps();
         });

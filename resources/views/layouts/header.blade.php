@@ -209,21 +209,18 @@
         <li class="dropdown-menu-header">
           <h6 class="dropdown-header ms-inline m-0"><span class="text-disabled">Welcome,@if (Auth::user()) {{ Auth::user()->name }}@endif</span></h6>
         </li>
-        @if (Auth::user()->role_id==1)
-        <li class="dropdown-divider"></li>
-        <li class="ms-dropdown-list">
-          <a class="media fs-14 p-2" href="profile.html"> <span><i class="flaticon-user mr-2"></i> {{ __('links.profile') }} </span>
-          </a>
-        </li>
+        @if (Auth::user()->role->name=='admin')
+        
         <li class="dropdown-divider"></li>
         <li class="ms-dropdown-list">
 
-          <a class="media fs-14 p-2" href="#"> <span><i class="flaticon-user mr-2"></i>Create New User</span>
-            <a class="media fs-14 p-2" href="#"> <span><i class="flaticon-user mr-2"></i>Users-List</span>
+        
+            <a class="media fs-14 p-2" href="{{ route('crm-users.index')}}"> <span><i class="flaticon-user mr-2"></i>Users-List</span>
             </a>
 
         </li>
         @endif
+        <li class="dropdown-divider"></li>
         <li class="dropdown-menu-footer">
           <a class="media fs-14 p-2" href="{{ route('logout') }}" onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">

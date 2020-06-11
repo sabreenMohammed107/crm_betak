@@ -20,7 +20,11 @@ class NationalitiesController extends Controller
     public function __construct(Nationality $object)
     {
         $this->middleware('auth'); 
-        $this->object = $object;
+        //get user
+       $this->middleware(function ($request, $next) {
+           $this->user = auth()->user();
+           return $next($request);
+       });        $this->object = $object;
         $this->viewName = 'nationalities.';
         $this->routeName = 'nationalities.';
         $this->message = 'The Data has been saved';
@@ -32,7 +36,7 @@ class NationalitiesController extends Controller
      */
     public function index()
     {
-        $data = $this->object::all();
+        $data = $this->object::where('company_id', '=', $this->user->company_id)->get();
 
         return view($this->viewName.'index', compact('data'));
     }
@@ -58,8 +62,9 @@ class NationalitiesController extends Controller
         $request->validate([
             'name' => 'required'
             ]);
-  
-            Nationality::create($request->all());
+            $input = $request->all();
+            $input['company_id']=$this->user->company_id;
+            Nationality::create($input);
    
         return redirect()->route('nationalities.index')
                         ->with('flash_success', $this->message);
@@ -106,6 +111,7 @@ class NationalitiesController extends Controller
     ]);
 
     $input = $request->all();
+    $input['company_id']=$this->user->company_id;
 
     $this->object::findOrFail($id)->update($input);
 

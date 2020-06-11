@@ -26,6 +26,11 @@ class CompanyController extends Controller
     public function __construct(Company $object)
     {
         $this->middleware('auth'); 
+        //get user
+       $this->middleware(function ($request, $next) {
+           $this->user = auth()->user();
+           return $next($request);
+       });
         $this->object = $object;
         $this->viewName = 'company.';
         $this->routeName = 'company.';
@@ -38,8 +43,8 @@ class CompanyController extends Controller
      */
     public function index()
     {
-        $rows = $this->object::orderBy("created_at", "Desc")->get();
-
+        //get companies where user login
+        $rows  = Company::with('user')->where('id', $this->user->company_id)->get();
 
         return view($this->viewName . 'index', compact('rows'));
     }

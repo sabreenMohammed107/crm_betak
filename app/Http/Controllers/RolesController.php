@@ -22,7 +22,11 @@ class RolesController extends Controller
     public function __construct(Role $object)
     {
         $this->middleware('auth'); 
-        $this->object = $object;
+        //get user
+       $this->middleware(function ($request, $next) {
+           $this->user = auth()->user();
+           return $next($request);
+       });        $this->object = $object;
         $this->viewName = 'roles.';
         $this->routeName = 'roles.';
         $this->message = 'The Data has been saved';
@@ -35,7 +39,7 @@ class RolesController extends Controller
      */
     public function index()
     {
-        $data = $this->object::all();
+        $data = $this->object::where('company_id', '=', $this->user->company_id)->get();
 
         return view($this->viewName.'index', compact('data'));
     }
@@ -63,7 +67,7 @@ class RolesController extends Controller
         ]);
 
         $input = $request->all();
-
+        $input['company_id']=$this->user->company_id;
         $this->object::create($input);
 
         return redirect()->route($this->routeName.'index')->with('flash_success', $this->message);
@@ -109,6 +113,7 @@ class RolesController extends Controller
         ]);
 
         $input = $request->all();
+        $input['company_id']=$this->user->company_id;
 
         $this->object::findOrFail($id)->update($input);
 

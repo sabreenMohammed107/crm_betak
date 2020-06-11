@@ -36,7 +36,11 @@ class LeadController extends Controller
     public function __construct(Contact $object)
     {
         $this->middleware('auth'); 
-        $this->object = $object;
+        //get user
+       $this->middleware(function ($request, $next) {
+           $this->user = auth()->user();
+           return $next($request);
+       });        $this->object = $object;
         $this->viewName = 'leads.';
         $this->routeName = 'lead.';
         $this->message = 'The Data has been saved';
@@ -48,14 +52,14 @@ class LeadController extends Controller
      */
     public function index()
     {
-        $rows = $this->object::where('contact_type', '=', 0)->orderBy("created_at", "Desc")->get();
+        $rows = $this->object::where('contact_type', '=', 0)->orderBy("created_at", "Desc")->where('company_id', '=', $this->user->company_id)->get();
 
-        $titles = Title::all();
-        $countries = Country::all();
-        $cities = City::all();
-        $nationalities = Nationality::all();
-        $users = User::all();
-        $reachs = Reach_Source::all();
+        $titles = Title::where('company_id', '=', $this->user->company_id)->get();
+        $countries = Country::where('company_id', '=', $this->user->company_id)->get();
+        $cities = City::where('company_id', '=', $this->user->company_id)->get();
+        $nationalities = Nationality::where('company_id', '=', $this->user->company_id)->get();
+        $users = User::where('company_id', '=', $this->user->company_id)->get();
+        $reachs = Reach_Source::where('company_id', '=', $this->user->company_id)->get();
         return view($this->viewName . 'index', compact('rows', 'titles', 'countries', 'cities', 'nationalities', 'users', 'reachs'));
     }
 
@@ -66,12 +70,12 @@ class LeadController extends Controller
      */
     public function create()
     {
-        $titles = Title::all();
-        $countries = Country::all();
-        $cities = City::all();
-        $nationalities = Nationality::all();
-        $users = User::all();
-        $reachs = Reach_Source::all();
+        $titles = Title::where('company_id', '=', $this->user->company_id)->get();
+        $countries = Country::where('company_id', '=', $this->user->company_id)->get();
+        $cities = City::where('company_id', '=', $this->user->company_id)->get();
+        $nationalities = Nationality::where('company_id', '=', $this->user->company_id)->get();
+        $users = User::where('company_id', '=', $this->user->company_id)->get();
+        $reachs = Reach_Source::where('company_id', '=', $this->user->company_id)->get();
         return view($this->viewName . 'create', compact('titles', 'countries', 'cities', 'nationalities', 'users', 'reachs'));
     }
 
@@ -148,7 +152,7 @@ class LeadController extends Controller
 
             $data['identity_path'] = $this->UplaodImage($identity_path);
         }
-
+        $data['company_id'] = $this->user->company_id;
         $this->object::create($data);
 
 
@@ -168,12 +172,12 @@ class LeadController extends Controller
         $row = Contact::find($id);
         // $rows = $this->object::where('contact_type', '=', 1)->orderBy("created_at", "Desc")->get();
 
-        $titles = Title::all();
-        $countries = Country::all();
-        $cities = City::all();
-        $nationalities = Nationality::all();
-        $users = User::all();
-        $reachs = Reach_Source::all();
+        $titles = Title::where('company_id', '=', $this->user->company_id)->get();
+        $countries = Country::where('company_id', '=', $this->user->company_id)->get();
+        $cities = City::where('company_id', '=', $this->user->company_id)->get();
+        $nationalities = Nationality::where('company_id', '=', $this->user->company_id)->get();
+        $users = User::where('company_id', '=', $this->user->company_id)->get();
+        $reachs = Reach_Source::where('company_id', '=', $this->user->company_id)->get();
         $activities = Contact_activity::where('contact_id', '=', $id)->get();
         return view($this->viewName . 'view', compact('row', 'titles','activities', 'countries', 'cities', 'nationalities', 'users', 'reachs'));
     }
@@ -197,12 +201,12 @@ public function convertToClient(Request $request){
         $row = Contact::find($id);
         // $rows = $this->object::where('contact_type', '=', 1)->orderBy("created_at", "Desc")->get();
 
-        $titles = Title::all();
-        $countries = Country::all();
-        $cities = City::all();
-        $nationalities = Nationality::all();
-        $users = User::all();
-        $reachs = Reach_Source::all();
+        $titles = Title::where('company_id', '=', $this->user->company_id)->get();
+        $countries = Country::where('company_id', '=', $this->user->company_id)->get();
+        $cities = City::where('company_id', '=', $this->user->company_id)->get();
+        $nationalities = Nationality::where('company_id', '=', $this->user->company_id)->get();
+        $users = User::where('company_id', '=', $this->user->company_id)->get();;
+        $reachs = Reach_Source::where('company_id', '=', $this->user->company_id)->get();
         return view($this->viewName . 'edit', compact('row', 'titles', 'countries', 'cities', 'nationalities', 'users', 'reachs'));
     }
 
@@ -280,7 +284,7 @@ public function convertToClient(Request $request){
 
             $data['identity_path'] = $this->UplaodImage($identity_path);
         }
-
+        $data['company_id'] = $this->user->company_id;
         $this->object::findOrFail($id)->update($data);
 
         return redirect()->route($this->routeName.'index')->with('flash_success', $this->message);
@@ -339,12 +343,12 @@ public function convertToClient(Request $request){
     public function addActivity($id)
     {
         $row = Contact::find($id);
-        $solved = User::all();
-        $services1 = Service::all();
-        $asigns = User::all();
-        $status = Status::all();
-        $activities = Activity::all();
-        $sourses=Activity_source::all();
+        $solved = User::where('company_id', '=', $this->user->company_id)->get();
+        $services1 = Service::where('company_id', '=', $this->user->company_id)->get();
+        $asigns = User::where('company_id', '=', $this->user->company_id)->get();
+        $status = Status::where('company_id', '=', $this->user->company_id)->get();
+        $activities = Activity::where('company_id', '=', $this->user->company_id)->get();
+        $sourses=Activity_source::where('company_id', '=', $this->user->company_id)->get();
         return view($this->viewName . 'addActivity', compact('row','sourses', 'activities', 'status', 'asigns', 'services1', 'solved'));
     }
     public function saveActivity(Request $request)
@@ -431,12 +435,12 @@ public function convertToClient(Request $request){
         $activity = Contact_activity::find($id);
         $rowId = $activity->contact_id;
         $row = Contact::find($rowId);
-        $solved = User::all();
-        $services1 = Service::all();
-        $asigns = User::all();
-        $status = Status::all();
-        $activities = Activity::all();
-        $sourses = Activity_source::all();
+        $solved = User::where('company_id', '=', $this->user->company_id)->get();
+        $services1 = Service::where('company_id', '=', $this->user->company_id)->get();
+        $asigns = User::where('company_id', '=', $this->user->company_id)->get();
+        $status = Status::where('company_id', '=', $this->user->company_id)->get();
+        $activities = Activity::where('company_id', '=', $this->user->company_id)->get();
+        $sourses = Activity_source::where('company_id', '=', $this->user->company_id)->get();
         $services = Activity_service::where('activity_id', '=', $id)->orderBy("created_at", "Desc")->get();
         foreach($services as $serv){
 

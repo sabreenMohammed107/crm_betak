@@ -15,6 +15,7 @@ class CreateContactServiceTable extends Migration
     {
         Schema::create('contact_service', function (Blueprint $table) {
             $table->increments('id');
+           
             $table->integer('contact_id')->unsigned()->nullable();
             $table->integer('service_id')->unsigned()->nullable();
             $table->string('notes', 700)->nullable();

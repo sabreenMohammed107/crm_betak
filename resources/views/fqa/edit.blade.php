@@ -44,7 +44,7 @@
 	                </div>
 	            </div>
 				<div class="form-group">
-	                {!! Form::label('name', __('titles.answer'))) !!}
+	                {!! Form::label('name', __('titles.answer')) !!}
 	                <div class="input-group">
 	            		{!! Form::textarea('answer', null, array('class'=>'form-control') ) !!}        
 	                </div>

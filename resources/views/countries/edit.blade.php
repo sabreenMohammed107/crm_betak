@@ -20,8 +20,8 @@
 	<div class="col-md-12">
 		<div class="ms-panel">
 			<div class="ms-panel-header d-flex justify-content-between">
-				<h6>{{ __('titles.edit') }}</h6>
-				<a  href="{{ route('titles.index') }}" class="btn btn-danger"> {{ __('links.back') }}  </a>
+				<h6>{{ __('links.countries') }}</h6>
+				<a  href="{{ route('countries.index') }}" class="btn btn-danger"> {{ __('links.back') }}  </a>
 			</div>
 			<div class="ms-panel-body col-md-6 col-md-offset-2">
 
@@ -35,7 +35,7 @@
 				</div>
 				@endif
 
-				{{ Form::model($data, [ 'method'=> 'PUT', 'route'=> ['titles.update', $data->id] ]) }}
+				{{ Form::model($data, [ 'method'=> 'PUT', 'route'=> ['countries.update', $data->id] ]) }}
 
 				<div class="form-group">
 	                {!! Form::label('name', __('links.editCountry')) !!}

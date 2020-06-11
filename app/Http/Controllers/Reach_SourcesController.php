@@ -14,8 +14,12 @@ class Reach_SourcesController extends Controller
      */
     public function __construct(Reach_Source $object)
     {
-        $this->middleware('auth');
-        $this->object = $object;
+        $this->middleware('auth'); 
+        //get user
+       $this->middleware(function ($request, $next) {
+           $this->user = auth()->user();
+           return $next($request);
+       });        $this->object = $object;
         $this->viewName = 'source.';
         $this->routeName = 'source.';
         $this->message = 'The Data has been saved'; 
@@ -24,7 +28,7 @@ class Reach_SourcesController extends Controller
     public function index()
     {
          
-        $data = Reach_Source::all();
+        $data = Reach_Source::where('company_id', '=', $this->user->company_id)->get();
 
         return view($this->viewName.'index', compact('data'));    }
 
@@ -51,6 +55,7 @@ class Reach_SourcesController extends Controller
         ]);
 
         $input = $request->all();
+        $input['company_id']=$this->user->company_id;
 
         $this->object::create($input);
 
@@ -95,6 +100,7 @@ class Reach_SourcesController extends Controller
         ]);
 
         $input = $request->all();
+        $input['company_id']=$this->user->company_id;
 
         $this->object::findOrFail($id)->update($input);
 

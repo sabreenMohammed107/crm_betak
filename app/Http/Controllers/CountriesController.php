@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Country;
+
 class CountriesController extends Controller
 {
     protected $object;
@@ -18,7 +19,12 @@ class CountriesController extends Controller
      */
     public function __construct(Country $object)
     {
-        $this->middleware('auth'); 
+         $this->middleware('auth'); 
+         //get user
+        $this->middleware(function ($request, $next) {
+            $this->user = auth()->user();
+            return $next($request);
+        });
         $this->object = $object;
         $this->viewName = 'countries.';
         $this->routeName = 'countries.';
@@ -32,9 +38,9 @@ class CountriesController extends Controller
      */
     public function index()
     {
-        $data = $this->object::all();
+        $data = $this->object::where('company_id', '=', $this->user->company_id)->get();
 
-        return view($this->viewName.'index', compact('data'));
+        return view($this->viewName . 'index', compact('data'));
     }
 
     /**
@@ -57,11 +63,14 @@ class CountriesController extends Controller
     {
         $request->validate([
             'name' => 'required'
-            ]);
-  
-        Country::create($request->all());
-   
-        return redirect()->route($this->routeName.'index')->with('flash_success', $this->message);
+        ]);
+        $input=[];
+        $input['name'] = $request->input('name');
+        $input['company_id'] = $this->user->company_id;
+
+        Country::create($input);
+
+        return redirect()->route($this->routeName . 'index')->with('flash_success', $this->message);
     }
 
     /**
@@ -72,8 +81,8 @@ class CountriesController extends Controller
      */
     public function show($id)
     {
-       // Not Used..
-       return redirect()->route($this->routeName.'index');
+        // Not Used..
+        return redirect()->route($this->routeName . 'index');
     }
 
     /**
@@ -86,7 +95,7 @@ class CountriesController extends Controller
     {
         $data = $this->object::findOrFail($id);
 
-        return view($this->viewName.'edit', compact('data'));
+        return view($this->viewName . 'edit', compact('data'));
     }
 
     /**
@@ -98,15 +107,17 @@ class CountriesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $this->validate($request,[
+        $this->validate($request, [
             'name' => 'required',
         ]);
 
-        $input = $request->all();
+        $input = [];
+        $input['company_id'] = $this->user->company_id;
+        $input['name'] = $request->input('name');
 
         $this->object::findOrFail($id)->update($input);
 
-        return redirect()->route($this->routeName.'index')->with('flash_success', $this->message);
+        return redirect()->route($this->routeName . 'index')->with('flash_success', $this->message);
     }
 
     /**
@@ -119,6 +130,6 @@ class CountriesController extends Controller
     {
         $this->object::findOrFail($id)->delete();
 
-        return redirect()->route($this->routeName.'index')->with('flash_success', $this->message)->with('flash_delete', 'true');
+        return redirect()->route($this->routeName . 'index')->with('flash_success', $this->message)->with('flash_delete', 'true');
     }
 }

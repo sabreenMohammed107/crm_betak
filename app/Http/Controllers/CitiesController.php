@@ -1,16 +1,18 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Http\Request;
 use App\Country;
 use App\City;
+use Auth;
 class CitiesController extends Controller
 {
     protected $object;
     protected $viewName;
     protected $routeName;
     protected $message;
+    protected $user;
 
     /**
      * Create a new controller instance.
@@ -20,10 +22,19 @@ class CitiesController extends Controller
     public function __construct(City $object)
     {
         $this->middleware('auth'); 
+
+       
+        $this->middleware(function ($request, $next) {
+            $this->user= auth()->user();
+             return $next($request);
+         });
         $this->object = $object;
         $this->viewName = 'cities.';
         $this->routeName = 'cities.';
         $this->message = 'The Data has been saved';
+        $this->message = $this->user;
+        
+        // $this->company = $auth;
     }
     /**
      * Display a listing of the resource.
@@ -32,12 +43,16 @@ class CitiesController extends Controller
      */
     public function index()
     {
-        // $items = Country::pluck('name','id');
-        $items = Country::all();
-        // $data = City::latest()->paginate(5);
-        $data =City::with('Country')->get();
+        
+
+      
+        $items = Country::where('company_id', '=', $this->user->company_id)->get();
+      
+        $data =City::with('Country')->where('company_id','=',$this->user->company_id)->get();
+      
+       
         return view($this->viewName.'index',compact('data','items'));
-        // ->with('i', (request()->input('page', 1) - 1) * 5);
+       
     }
 
     /**
@@ -65,6 +80,8 @@ class CitiesController extends Controller
             City::create([
                 'name' => request('name'),
                 'country_id' => request('country'),
+             'company_id' => $this->user->company_id,
+
                
             ]);
             // City::create($request->all());
@@ -91,7 +108,7 @@ class CitiesController extends Controller
      */
     public function edit($id)
     {
-        $country =Country::all()->pluck('name', 'id');
+        $country =Country::where('company_id', '=', $this->user->company_id)->pluck('name', 'id');
         $data = $this->object::findOrFail($id);
         $selected= $data->country_id;
         return view($this->viewName.'edit', compact('data','country','selected'));
@@ -114,6 +131,8 @@ class CitiesController extends Controller
            $this->object::findOrFail($id)->update(([
             'name' => request('name'),
             'country_id' => request('country'),
+            'company_id'=> $this->user->company_id
+
            
         ]));
    

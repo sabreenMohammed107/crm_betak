@@ -37,12 +37,12 @@
 								<td>{{ $index }}</td>
 								<td>{{ $row->name }}</td>
 								<td>
-									<a href="{{ route('titles.edit', $row->id) }}" class="btn d-inline-block btn-info">{{ __('links.edit') }} </a>
+									<a href="{{ route('countries.edit', $row->id) }}" class="btn d-inline-block btn-info">{{ __('links.edit') }} </a>
 
 
 									<a href="#" onclick="destroy('this title', '{{$row->id}}')" class="btn d-inline-block btn-danger">{{ __('links.delete') }} </a>
 
-									<form id="delete_{{$row->id}}" action="{{ route('titles.destroy', $row->id) }}"  method="POST" style="display: none;">
+									<form id="delete_{{$row->id}}" action="{{ route('countries.destroy', $row->id) }}"  method="POST" style="display: none;">
 									@csrf
 									@method('DELETE')
 									<button type="submit" value=""></button>

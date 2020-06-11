@@ -26,7 +26,11 @@ class CrmUserController extends Controller
     public function __construct(User $object)
     {
         $this->middleware('auth'); 
-        $this->object = $object;
+        //get user
+       $this->middleware(function ($request, $next) {
+           $this->user = auth()->user();
+           return $next($request);
+       });        $this->object = $object;
         $this->viewName = 'crm-users.';
         $this->routeName = 'crm-users.';
         $this->message = 'The Data has been saved';
@@ -38,7 +42,7 @@ class CrmUserController extends Controller
      */
     public function index()
     {
-        $rows = $this->object::orderBy("created_at", "Desc")->get();
+        $rows = $this->object::orderBy("created_at", "Desc")->where('company_id', '=', $this->user->company_id)->get();
         $companies = Company::all();
 
         return view($this->viewName . 'index', compact('rows', 'companies'));
@@ -77,7 +81,7 @@ class CrmUserController extends Controller
             'mobile_2'=>$request->input('mobile_2'),
             'email'=>$request->input('email'),
             'hire_date'=>Carbon::parse($request->input('hire_date')),
-            'phone'=>010,
+            'phone'=>$request->input('phone'),
             'status'=>1,
             'address'=>$request->input('address'),
             'active' => $active,
@@ -158,7 +162,7 @@ class CrmUserController extends Controller
             'mobile_2'=>$request->input('mobile_2'),
             'email'=>$request->input('email'),
             'hire_date'=>Carbon::parse($request->input('hire_date')),
-            'phone'=>010,
+            'phone'=>$request->input('phone'),
             'status'=>1,
             'address'=>$request->input('address'),
             'active' => $active,

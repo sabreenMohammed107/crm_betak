@@ -10,7 +10,7 @@ class Contact extends Model
      * client type "0" lead , "1" client
      */
     protected $fillable = [
-        'title_id', 'name', 'email', 'primary_mobile', 'secondry_mobile', 'phone', 'whatsapp','facebook',
+        'title_id', 'name', 'email', 'primary_mobile', 'secondry_mobile', 'phone','company_id', 'whatsapp','facebook',
         'fb_account', 'website', 'address', 'birthdate', 'country_id', 'city_id', 'nationality_id',
         'job', 'company', 'contact_type', 'assigned_to', 'reach_source_id', 'image','customer_type', 'identity',
         'identity_path', 'status_id','created_by_user'

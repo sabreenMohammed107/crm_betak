@@ -132,8 +132,14 @@
                                                             </div>
                                                             <div class="col-md-6">
                                                                 <div class="form-group">
+                                                                    <label class="exampleInputPassword1" for="exampleCheck1">User Phone </label>
+                                                                    <input type="text" id="newClint" name="phone" value="{{$row->phone}}" class="form-control">
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                                <div class="form-group">
                                                                     <label class="exampleInputPassword1" for="exampleCheck1">Email </label>
-                                                                    <input type="email" id="newClint" name="email" value="{{$row->email}}" class="form-control">
+                                                                    <input type="email" id="newClint" required name="email" value="{{$row->email}}" class="form-control">
                                                                 </div>
                                                             </div>
                                                             <div class="col-md-6">
@@ -162,7 +168,7 @@
                                                             <div class="col-md-6">
                                                                 <div class="form-group">
                                                                     <label>Company</label>
-                                                                    <select name="company_id" class="form-control" id="">
+                                                                    <select name="company_id" class="form-control" id="" required>
                                                                         <option value=""> @if($row->company)
                                                                             {{ $row->company->name}}
 
@@ -236,19 +242,19 @@
 
                             <div class="ms-auth-container row">
 
-                              
+
                                 <div class="col-md-6">
-                            <label> img_identity </label>
-                            <div class="form-group">
-                                <div id="uploadOne" class="img-upload">
-                                    <img src="{{ asset('assets/img/default-user.gif')}}" alt="">
-                                    <div class="upload-icon">
-                                        <input type="file" name="pic" class="upload">
-                                        <i class="fas fa-camera    "></i>
+                                    <label> img_identity </label>
+                                    <div class="form-group">
+                                        <div id="uploadOne" class="img-upload">
+                                            <img src="{{ asset('assets/img/default-user.gif')}}" alt="">
+                                            <div class="upload-icon">
+                                                <input type="file" name="pic" class="upload">
+                                                <i class="fas fa-camera    "></i>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        </div>
                                 <div class="col-md-3">
 
                                 </div>
@@ -291,8 +297,14 @@
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
+                                        <label class="exampleInputPassword1" for="exampleCheck1">User Phone </label>
+                                        <input type="text" id="newClint" name="phone"  class="form-control">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
                                         <label class="exampleInputPassword1" for="exampleCheck1">Email </label>
-                                        <input type="email" id="newClint" name="email" class="form-control">
+                                        <input type="email" id="newClint" name="email" required class="form-control">
                                     </div>
                                 </div>
                                 <div class="col-md-6">
@@ -314,7 +326,7 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label>Company</label>
-                                        <select name="company_id" class="form-control" id="">
+                                        <select name="company_id" class="form-control" id="" required>
                                             <option value="">Select</option>
                                             @foreach ($companies as $company)
                                             <option value='{{$company->id}}'>

@@ -33,7 +33,7 @@
 
                     <div class="ms-auth-container row">
 
-                        <div class="col-md-4 col-sm-6">
+                        <div class="col-md-6 col-sm-6">
 
                             <div class="form-group d-flex">
                                 <label for=""> logo</label>
@@ -46,38 +46,38 @@
                                 </div>
                             </div>
                         </div>
-
-                        <div class="col-md-4 col-sm-6">
+                        <div class="col-md-6 col-sm-6"></div>
+                        <div class="col-md-6 col-sm-6">
                             <div class="form-group">
                                 <label>Name </label>
                                 <input type="text" id="Cname" name="name" value="{{$row->name}}" class="form-control" placeholder="name">
                             </div>
                         </div>
-                        <div class="col-md-4 col-sm-6">
+                        <div class="col-md-6 col-sm-6">
                             <div class="form-group">
                                 <label>Address </label>
                                 <input type="text" id="CAddress" name="address" value="{{$row->address}}" class="form-control" placeholder="Address">
                             </div>
                         </div>
-                        <div class="col-md-4 col-sm-6">
+                        <div class="col-md-6 col-sm-6">
                             <div class="form-group">
                                 <label>Mobile1 </label>
                                 <input type="text" id="CMobile1" name="mobile_1" value="{{$row->mobile_1}}" class="form-control" placeholder="Mobile1">
                             </div>
                         </div>
-                        <div class="col-md-4 col-sm-6">
+                        <div class="col-md-6 col-sm-6">
                             <div class="form-group">
                                 <label>Mobile2 </label>
                                 <input type="text" id="CMobile2" name="mobile_2" value="{{$row->mobile_2}}" class="form-control" placeholder="Mobile2">
                             </div>
                         </div>
-                        <div class="col-md-4 col-sm-6">
+                        <div class="col-md-6 col-sm-6">
                             <div class="form-group">
                                 <label>Phone </label>
                                 <input type="text" id="CPhone" name="phone" value="{{$row->phone}}" class="form-control" placeholder="Phone">
                             </div>
                         </div>
-                        <div class="col-md-4 col-sm-6">
+                        <div class="col-md-6 col-sm-6">
                             <div class="form-group">
                                 <label>Email </label>
                                 <input type="email" value="{{$row->email}}" name="email" id="CEmail" class="form-control" placeholder="Email">

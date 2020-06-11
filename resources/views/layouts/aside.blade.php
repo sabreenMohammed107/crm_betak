@@ -61,6 +61,7 @@
       </li>
     <!--  Leads  -->
     <!-- Users  -->
+    @if (Auth::user()->role->name=='admin')
     <li class="menu-item">
         <a href="#" class="has-chevron" data-toggle="collapse" data-target="#Usersdropdown" aria-expanded="false" aria-controls="Usersdropdown">
         <span><i class="material-icons fs-16">assignment_ind</i> {{ __('links.companies') }}/ {{ __('links.users') }}</span>
@@ -71,11 +72,12 @@
          
         </ul>
       </li>
+      @endif
     <!--  Users  -->
 
 
     <!-- Roles  -->
-    <li class="menu-item">
+    <!-- <li class="menu-item">
         <a href="#" class="has-chevron" data-toggle="collapse" data-target="#Rolesdropdown" aria-expanded="false" aria-controls="Rolesdropdown">
         <span><i class="material-icons fs-16">lock</i> {{ __('links.roles_permission') }}</span>
       </a>
@@ -84,7 +86,7 @@
           <li> <a href="#">{{ __('links.permission') }}</a> </li>
          
         </ul>
-      </li>
+      </li> -->
     <!--  Roles  --> 
      
     
