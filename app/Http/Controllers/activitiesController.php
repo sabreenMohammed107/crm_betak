@@ -31,7 +31,7 @@ class activitiesController extends Controller
     }
     public function index()
     {
-        $data = $this->object::all();
+        $data = $this->object::where('company_id', '=', $this->user->company_id)->get();
 
         return view($this->viewName.'index', compact('data'));
     }
@@ -59,6 +59,7 @@ class activitiesController extends Controller
         ]);
 
         $input = $request->all();
+        $input['company_id']=$this->user->company_id;
 
         $this->object::create($input);
 
@@ -105,6 +106,7 @@ class activitiesController extends Controller
         ]);
 
         $input = $request->all();
+        $input['company_id']=$this->user->company_id;
 
         $this->object::findOrFail($id)->update($input);
 
