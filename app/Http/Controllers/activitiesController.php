@@ -24,6 +24,11 @@ class activitiesController extends Controller
     public function __construct(Activity $object)
     {
         $this->middleware('auth'); 
+         //get user
+       $this->middleware(function ($request, $next) {
+        $this->user = auth()->user();
+        return $next($request);
+    });  
         $this->object = $object;
         $this->viewName = 'activities.';
         $this->routeName = 'activities.';
