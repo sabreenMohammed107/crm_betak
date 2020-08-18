@@ -349,7 +349,6 @@ $('#slide-submenu').on('click',function() {
 });
 
 $('.mini-submenu').on('click',function(){		
-  alert('xx');
   $('.list-group').toggle('slide');
   $('#contentBar').toggleClass('col-sm-8 col-md-9')
   $('.mini-submenu').hide();
