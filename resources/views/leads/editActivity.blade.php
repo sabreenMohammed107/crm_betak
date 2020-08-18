@@ -75,9 +75,7 @@
             <a href="#" class="list-group-item">
                 <b>Reach Source : </b> @if($row->reach){{$row->reach->name}} @endif
             </a>
-            <a href="#" class="list-group-item">
-                <b>Contact Status Id : </b> @if($row->status){{$row->status->id}} @endif
-            </a>
+           
 
         </div>
     </div>
@@ -95,39 +93,10 @@
                                 <input type="hidden" name="updatedId" value="{{$activity->id}}">
                                 <input type="hidden" name="contact_id" value="{{$row->id}}">
 
+                                <h1 style="background-color: #CCC;">First</h1>
                                 <div class="row justify-content-between Services_Container">
 
-                                    <div class="  col-sm-6 col-md-5  d-flex">
-                                        <label for="name">Activity Type</label>
-                                        <div class="input-group">
-
-                                            <select name="activity_type" id="" class="form-control">
-                                                <option value="1" {{ $activity->activity_type == 1 ? 'selected' : '' }}>Event</option>
-                                                <option value="2" {{ $activity->activity_type == 2 ? 'selected' : '' }}>todo</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="  col-sm-6 col-md-5  d-flex">
-                                        <label for="name">lead Id</label>
-                                        <div class="input-group">
-
-                                            <input type="text" name="contact_id" value="{{$row->id}}" class="form-control">
-
-                                        </div>
-                                    </div>
-                                    <div class="  col-sm-6 col-md-5  d-flex">
-                                        <label for="name">Activity</label>
-                                        <div class="input-group">
-                                            <select name="activity_type_id" id="" class="form-control">
-
-                                                @foreach ($activities as $data)
-                                                <option value='{{$data->id}}' {{ $data->id == $activity->activity_type_id ? 'selected' : '' }}>
-                                                    {{ $data->name }}</option>
-                                                @endforeach
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="  col-sm-6 col-md-5  d-flex">
+                                <div class="  col-sm-6 col-md-5  d-flex">
                                         <label for="name">Activity date</label>
                                         <div class="input-group">
                                             <div class="input-group-prepend">
@@ -135,46 +104,6 @@
                                             </div>
                                             <?php $date = date_create($activity->activity_date) ?>
                                             <input type="text" value="{{ date_format($date,'d-m-Y') }}" name="activity_date" class="form-control" data-toggle="datepicker">
-                                        </div>
-                                    </div>
-                                    <div class="  col-sm-6 col-md-5  d-flex">
-                                        <label for="name">max todo date</label>
-                                        <div class="input-group">
-                                            <div class="input-group-prepend">
-                                                <span class="input-group-text"><i class="fas fa-calendar"></i></span>
-                                            </div>
-                                            <?php $date = date_create($activity->max_todo_date) ?>
-                                            <input type="text" value="{{ date_format($date,'d-m-Y') }}" name="max_todo_date" class="form-control" data-toggle="datepicker">
-                                        </div>
-                                    </div>
-                                    <div class="  col-sm-6 col-md-5  d-flex">
-                                        <label for="name">In Going Out Going Flag</label>
-                                        <div class="input-group">
-                                            <select name="ingoing_outgoining_flag" id="" class="form-control">
-                                                <option value="1" {{  $activity->ingoing_outgoining_flag==1 ? 'selected' : '' }}>contact with us </option>
-                                                <option value="2" {{ $activity->ingoing_outgoining_flag==2 ? 'selected' : '' }}>we conatct him</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="  col-sm-6 col-md-5  d-flex">
-                                        <label for="name">Lead Status</label>
-                                        <div class="input-group">
-                                            <select name="status_id" id="" class="form-control">
-
-                                                @foreach ($status as $data)
-                                                <option value='{{$data->id}}' {{ $data->id == $activity->status_id ? 'selected' : '' }}>
-                                                    {{ $data->name }}</option>
-                                                @endforeach
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="  col-sm-6 col-md-5  d-flex">
-                                        <label for="name">facebook url</label>
-                                        <div class="input-group">
-                                            <div class="input-group-prepend">
-                                                <span class="input-group-text"><i class="fab fa-facebook"></i></span>
-                                            </div>
-                                            <input type="text" name="facebook_url" value="{{$activity->facebook_url}}" class="form-control">
                                         </div>
                                     </div>
 
@@ -215,7 +144,116 @@
 
                                         </div>
                                     </div>
-                               
+                                    <div class="  col-sm-6 col-md-5  d-flex">
+                                        <label for="name">In Going Out Going Flag</label>
+                                        <div class="input-group">
+                                            <select name="ingoing_outgoining_flag" id="" class="form-control">
+                                                <option value="1" {{  $activity->ingoing_outgoining_flag==1 ? 'selected' : '' }}>contact with us </option>
+                                                <option value="2" {{ $activity->ingoing_outgoining_flag==2 ? 'selected' : '' }}>we conatct him</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="servicesss  col-sm-6 col-md-5  d-flex">
+                                    <label for="name">Service 1</label>
+                                    <div class="input-group">
+                                    <select theme="google" class="selectxx" name="service_id[]" width="400" style="" placeholder="@if(!(isset($tags[0]))) @else{{ $tags[0]['text']}} @endif" data-search="true">
+                                        @if((isset($tags[0])&& $tags['0'] !==null))
+                                        <option value=''>select</option>
+                                        @endif
+                                            @foreach ($services1 as $data)
+                                            <option value='{{$data->id}}' {{ (isset($tags[0])&& $tags[0]['id']==$data->id)?'selected':''}}>
+                                                {{ $data->text }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="  col-sm-6 col-md-5  d-flex">
+                                        <label for="name">Activity Type</label>
+                                        <div class="input-group">
+
+                                            <select name="activity_type" id="" class="form-control">
+                                                <option value="1" {{ $activity->activity_type == 1 ? 'selected' : '' }}>Event</option>
+                                                <option value="2" {{ $activity->activity_type == 2 ? 'selected' : '' }}>todo</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="servicesss  col-sm-6 col-md-5  d-flex">
+                                    <label for="name">Service 2</label>
+                                    <div class="input-group">
+                                    <select theme="google" class="selectxx" name="service_id[]" width="400" style="" placeholder="@if(!(isset($tags[1])&& $tags['1'] !==null)) @else{{ $tags[1]['text']}} @endif" data-search="true">
+                                        @if(!(isset($tags[1])&& $tags['1'] !==null))
+                                        <option value=''>select</option>
+                                        @endif
+                                            @foreach ($services1 as $data)
+                                            <option value='{{$data->id}}' {{ (isset($tags[1])&& $tags[1]['id']==$data->id)?'selected':''}}>
+                                                {{ $data->text }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="  col-sm-6 col-md-5  d-flex">
+                                        <label for="name">Activity</label>
+                                        <div class="input-group">
+                                            <select name="activity_type_id" id="" class="form-control">
+
+                                                @foreach ($activities as $data)
+                                                <option value='{{$data->id}}' {{ $data->id == $activity->activity_type_id ? 'selected' : '' }}>
+                                                    {{ $data->name }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="servicesss  col-sm-6 col-md-5  d-flex">
+                                    <label for="name">Service 2</label>
+                                    <div class="input-group">
+                                    <select theme="google" class="selectxx" name="service_id[]" width="400" style="" placeholder=" @if(!(isset($tags[2])&& $tags['2'] !==null)) @else{{ $tags[2]['text']}} @endif" data-search="true">
+                                         @if(!(isset($tags[2])&& $tags['2'] !==null))
+                                        <option value=''>select</option>
+                                        @endif
+                                                @foreach ($services1 as $data)
+                                                <option value='{{$data->id}}' {{ (isset($tags[2])&& $tags[2]['id']==$data->id)?'selected':''}}>
+                                                    {{ $data->text}}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+
+                                       
+                                </div>
+                                <div class="  col-sm-6 col-md-5  d-flex">
+                                        <label for="name">facebook url</label>
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="fab fa-facebook"></i></span>
+                                            </div>
+                                            <input type="text" name="facebook_url" value="{{$activity->facebook_url}}" class="form-control">
+                                        </div>
+                                    </div>
+                                    <div class="  col-sm-6 col-md-5  d-flex">
+                                        <label for="name">Lead Status</label>
+                                        <div class="input-group">
+                                            <select name="status_id" id="" class="form-control">
+
+                                                @foreach ($status as $data)
+                                                <option value='{{$data->id}}' {{ $data->id == $activity->status_id ? 'selected' : '' }}>
+                                                    {{ $data->name }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                    </div>
+                                    </div>
+                                <hr>
+                                <h1 style="background-color: #CCC;">Second</h1>
+                                <div class="row justify-content-between Services_Container">
+                                <div class="  col-sm-6 col-md-5  d-flex">
+                                    <label for="name"> todo status</label>
+                                    <div class="input-group">
+                                        <select name="todo_status_id" id="" class="form-control">
+                                            <option value="1" {{  $activity->todo_status_id==1 ? 'selected' : '' }}>in progress </option>
+                                            <option value="2" {{ $activity->todo_status_id==2 ? 'selected' : '' }}>completed</option>
+                                        </select>
+                                    </div>
+                                </div>
                                 <div class="  col-sm-6 col-md-5  d-flex">
                                     <label for="name">Assigned to</label>
                                     <div class="input-group">
@@ -228,57 +266,17 @@
                                         </select>
                                     </div>
                                 </div>
-
                                 <div class="  col-sm-6 col-md-5  d-flex">
-                                    <label for="name">Activity Source</label>
-                                    <div class="input-group">
-                                        <select name="activity_source_id" id="" class="form-control">
-
-                                            @foreach ($sourses as $data)
-                                            <option value='{{$data->id}}' {{ $data->id == $activity->activity_source_id ? 'selected' : '' }}>
-                                                {{ $data->name }}</option>
-                                            @endforeach
-                                        </select>
+                                        <label for="name">max todo date</label>
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="fas fa-calendar"></i></span>
+                                            </div>
+                                            <?php $date = date_create($activity->max_todo_date) ?>
+                                            <input type="text" value="{{ date_format($date,'d-m-Y') }}" name="max_todo_date" class="form-control" data-toggle="datepicker">
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="servicesss  col-sm-6 col-md-5  d-flex">
-                                    <label for="name">Service 1</label>
-                                    <div class="input-group">
-                                        <select name="service_id[]" id="" class="form-control">
-                                        @if((isset($tags[0])&& $tags['0'] !==null))
-                                        <option value=''>select</option>
-                                        @endif
-                                            @foreach ($services1 as $data)
-                                            <option value='{{$data->id}}' {{ (isset($tags[0])&& $tags[0]['id']==$data->id)?'selected':''}}>
-                                                {{ $data->text }}</option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="  col-sm-6 col-md-5  d-flex">
-                                    <label for="name"> todo status</label>
-                                    <div class="input-group">
-                                        <select name="todo_status_id" id="" class="form-control">
-                                            <option value="1" {{  $activity->todo_status_id==1 ? 'selected' : '' }}>in progress </option>
-                                            <option value="2" {{ $activity->todo_status_id==2 ? 'selected' : '' }}>completed</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="servicesss  col-sm-6 col-md-5  d-flex">
-                                    <label for="name">Service 2</label>
-                                    <div class="input-group">
-                                        <select name="service_id[]" id="" class="form-control">
-                                        @if(!(isset($tags[1])&& $tags['1'] !==null))
-                                        <option value=''>select</option>
-                                        @endif
-                                            @foreach ($services1 as $data)
-                                            <option value='{{$data->id}}' {{ (isset($tags[1])&& $tags[1]['id']==$data->id)?'selected':''}}>
-                                                {{ $data->text }}</option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="  col-sm-6 col-md-5  d-flex">
+                                    <div class="  col-sm-6 col-md-5  d-flex">
                                     <label for="name"> todo solved by</label>
                                     <div class="input-group">
                                         <select name="todo_solved_by" id="" class="form-control">
@@ -290,27 +288,11 @@
                                         </select>
                                     </div>
                                 </div>
-
-
-                                <div class="servicesss  col-sm-6 col-md-5 row no-gutters">
-                                    <label class="col-3" for="name">Service 3</label>
-                                    <div class="d-flex col-9 w-100 justify-content-between">
-                                        <div class="input-group">
-                                            <select name="service_id[]" id="" class="form-control">
-                                            @if(!(isset($tags[2])&& $tags['2'] !==null))
-                                        <option value=''>select</option>
-                                        @endif
-                                                @foreach ($services1 as $data)
-                                                <option value='{{$data->id}}' {{ (isset($tags[2])&& $tags[2]['id']==$data->id)?'selected':''}}>
-                                                    {{ $data->text}}</option>
-                                                @endforeach
-                                            </select>
-                                        </div>
-                                        <!-- <a href="#" class="ms-btn-icon btn-info " onclick="xx('{{$services1}}')" id="Add_new_DService"><i class="fas fa-plus"></i> -->
-
-                                        </a>
-                                    </div>
                                 </div>
+                                <hr>
+                                <h1 style="background-color: #CCC;">Third</h1>
+                                <div class="row justify-content-between Services_Container">
+ 
                                 <div class="  col-sm-6 col-md-5  d-flex">
                                         <label for="name"> created by</label>
                                         <div class="input-group">
@@ -320,20 +302,16 @@
                                         </div>
                                     </div>
 
-
-
-
-
-
                                 </div>
-                        <div class="row justify-content-between">
-                            <div class="col-md-6 d-flex">
+                                <div class="  col-sm-6 col-md-5  d-flex"></div>
+                                <div class="col-md-6 d-flex">
                                 <label class="mt-2" for="">Note</label>
                                 <div class="mx-3">
 
                                     <textarea name="notes" id="" rows="10" class=" form-control editable">{{$activity->notes}}</textarea>
                                 </div>
                             </div>
+
                             <div class="col-md-5">
                                 <div class="form-group d-flex">
                                     <label class="mt-2" for="">Screenshot</label>
@@ -346,6 +324,9 @@
                                     </div>
                                 </div>
                             </div>
+
+                            
+                           
                         </div>
                         <div class="input-group d-flex justify-content-end text-center">
                             <a href="{{ route('lead.show',$row->id) }}" class="btn btn-dark mx-2"> Cancel </a>

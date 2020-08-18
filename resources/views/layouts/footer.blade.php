@@ -28,10 +28,21 @@
   <script src="{{ asset('assets/vendors/jquery-circle-progress/dist/circle-progress.min.js')}}"></script>
   <!-- Mystic core JavaScript -->
   <script src="{{ asset('assets/js/framework.js')}}"></script>
-
+  <script src="{{ asset('assets/js/selectstyle.js')}}"></script>
   <!-- Settings -->
   <script src="{{ asset('assets/js/settings.js')}}"></script>
+  <!-- Latest compiled and minified JavaScript -->
 
+<script>
+jQuery(document).ready(function($) {
+	$('.selectxx').selectstyle({
+		width  : 400,
+		height : 300,
+		theme  : 'light',
+		onchange : function(val){}
+	});
+});
+</script>
   <script>
     @yield('script')
   </script>

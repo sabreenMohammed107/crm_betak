@@ -8,12 +8,30 @@
 <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="{{ route('/') }}"><i class="material-icons"></i> {{ __('links.home') }} </a></li>
-        <li class="breadcrumb-item active" aria-current="page"> {{ __('links.Leads') }} </li>
+        <li class="breadcrumb-item active" aria-current="page"> {{ __('Leads') }} </li>
     </ol>
 </nav>
 
 @endsection
+<style>
+    .dropdown-item.active,
+    .dropdown-item:active {
+        color: #fff;
+        text-decoration: none;
+        background-color: #ffff !important;
+    }
 
+    .bootstrap-select>.dropdown-toggle.bs-placeholder,
+    .bootstrap-select>.dropdown-toggle.bs-placeholder:active,
+    .bootstrap-select>.dropdown-toggle.bs-placeholder:focus,
+    .bootstrap-select>.dropdown-toggle.bs-placeholder:hover {
+        color: #fff !important;
+    }
+
+    .input-group .bootstrap-select.form-control {
+        z-index: inherit;
+    }
+</style>
 @section('content')
 
 <div class="fixed-profile mb-3 d-flex w-100 justify-content-between align-items-end">
@@ -36,7 +54,7 @@
 
         <div class="list-group">
             <span href="#" class="d-flex justify-content-between list-group-item bg-dark text-white">
-                <span>INFO</span>
+            <span>INFO</span>
                 <span class="bg-light" id="slide-submenu">
                     <i class="fa fa-times"></i>
                 </span>
@@ -75,9 +93,7 @@
             <a href="#" class="list-group-item">
                 <b>Reach Source : </b> @if($row->reach){{$row->reach->name}} @endif
             </a>
-            <a href="#" class="list-group-item">
-                <b>Contact Status Id : </b> @if($row->status){{$row->status->id}} @endif
-            </a>
+           
 
         </div>
     </div>
@@ -94,96 +110,20 @@
                                 {{ csrf_field() }}
                                 <input type="hidden" name="contact_type" value="0">
                                 <input type="hidden" name="contact_id" value="{{$row->id}}">
-
+                                <h1 style="background-color: #CCC;">First</h1>
                                 <div class="row justify-content-between Services_Container">
-                                    <!-- <div class=" col-sm-6 col-md-5  d-flex">
-                                        <label for="name">Client Activity Id</label>
-                                        <div class="input-group">
 
-                                            <input type="text" class="form-control">
 
-                                        </div>
-                                    </div> -->
 
-                                    <div class="  col-sm-6 col-md-5  d-flex">
-                                        <label for="name">Activity Type</label>
-                                        <div class="input-group">
-
-                                            <select name="activity_type" id="" class="form-control">
-                                                <option value="1">Event</option>
-                                                <option value="2">todo</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="  col-sm-6 col-md-5  d-flex">
-                                        <label for="name">Lead Id</label>
-                                        <div class="input-group">
-
-                                            <input type="text" name="contact_id" value="{{$row->id}}" class="form-control">
-
-                                        </div>
-                                    </div>
-                                    <div class="  col-sm-6 col-md-5  d-flex">
-                                        <label for="name">Activity</label>
-                                        <div class="input-group">
-                                            <select name="activity_type_id" id="" class="form-control">
-                                                <option value="">select</option>
-                                                @foreach ($activities as $data)
-                                                <option value='{{$data->id}}'>
-                                                    {{ $data->name }}</option>
-                                                @endforeach
-                                            </select>
-                                        </div>
-                                    </div>
                                     <div class="  col-sm-6 col-md-5  d-flex">
                                         <label for="name">Activity date</label>
                                         <div class="input-group">
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text"><i class="fas fa-calendar"></i></span>
                                             </div>
-                                            <input type="text" name="activity_date" class="form-control" data-toggle="datepicker">
+                                            <input type="text" value='{{ date_format(now(),"m/d/Y") }}' name="activity_date" class="form-control" data-toggle="datepicker">
                                         </div>
                                     </div>
-                                    <div class="  col-sm-6 col-md-5  d-flex">
-                                        <label for="name">max todo date</label>
-                                        <div class="input-group">
-                                            <div class="input-group-prepend">
-                                                <span class="input-group-text"><i class="fas fa-calendar"></i></span>
-                                            </div>
-                                            <input type="text" name="max_todo_date" class="form-control" data-toggle="datepicker">
-                                        </div>
-                                    </div>
-                                    <div class="  col-sm-6 col-md-5  d-flex">
-                                        <label for="name">In Going Out Going Flag</label>
-                                        <div class="input-group">
-                                            <select name="ingoing_outgoining_flag" id="" class="form-control">
-                                                <option value="1">contact with us </option>
-                                                <option value="2">we conatct him</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="  col-sm-6 col-md-5  d-flex">
-                                        <label for="name">Lead Status</label>
-                                        <div class="input-group">
-                                            <select name="status_id" id="" class="form-control">
-                                                <option value="">select</option>
-                                                @foreach ($status as $data)
-                                                <option value='{{$data->id}}'>
-                                                    {{ $data->name }}</option>
-                                                @endforeach
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="  col-sm-6 col-md-5  d-flex">
-                                        <label for="name">facebook url</label>
-                                        <div class="input-group">
-                                            <div class="input-group-prepend">
-                                                <span class="input-group-text"><i class="fab fa-facebook"></i></span>
-                                            </div>
-                                            <input type="text" name="facebook_url" class="form-control">
-                                        </div>
-                                    </div>
-
                                     <style>
                                         .star-rating input {
                                             display: none;
@@ -211,6 +151,109 @@
                                         </div>
                                     </div>
                                     <div class="  col-sm-6 col-md-5  d-flex">
+                                        <label for="name">In Going Out Going Flag</label>
+                                        <div class="input-group">
+                                            <select name="ingoing_outgoining_flag" id="" class="form-control">
+                                                <option value="1">contact with us </option>
+                                                <option value="2">we conatct him</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class=" col-sm-6 col-md-5  d-flex">
+                                        <label for="name">Service 1</label>
+                                        <div class="input-group">
+
+                                            <select theme="google" class="selectxx" name="service_id[]" width="400" style="" placeholder="Select Servvvice" data-search="true">
+
+                                                <option value="">Servvvice</option>
+                                                @foreach ($services1 as $data)
+                                                <option value='{{$data->id}}'>
+                                                    {{ $data->text }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="  col-sm-6 col-md-5  d-flex">
+                                        <label for="name">Activity Type</label>
+                                        <div class="input-group">
+
+                                            <select name="activity_type" id="" class="form-control">
+                                                <option value="2">todo</option>
+
+                                                <option value="1">Event</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="  col-sm-6 col-md-5  d-flex">
+                                        <label for="name">Service 2</label>
+                                        <div class="input-group">
+                                        <select theme="google" class="selectxx" name="service_id[]" width="400" style="" placeholder="Select Servvvice" data-search="true">
+                                                @foreach ($services1 as $data)
+                                                <option value='{{$data->id}}'>
+                                                    {{ $data->text }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="  col-sm-6 col-md-5  d-flex">
+                                        <label for="name">Activity</label>
+                                        <div class="input-group">
+                                            <select name="activity_type_id" id="" class="form-control">
+                                                @foreach ($activities as $data)
+                                                <option value='{{$data->id}}'>
+                                                    {{ $data->name }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6 col-md-5  d-flex">
+                                        <label for="name">Service 3</label>
+                                        <div class="input-group">
+                                        <select theme="google" class="selectxx" name="service_id[]" width="400" style="" placeholder="Select Servvvice" data-search="true">
+                                                @foreach ($services1 as $data)
+                                                <option value='{{$data->id}}'>
+                                                    {{ $data->text}}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+
+                                    </div>
+                                    <div class="  col-sm-6 col-md-5  d-flex">
+                                        <label for="name">facebook url</label>
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="fab fa-facebook"></i></span>
+                                            </div>
+                                            <input type="text" name="facebook_url" class="form-control">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6 col-md-5  d-flex mt-3">
+                                        <label for="name">Lead Status</label>
+                                        <div class="input-group">
+                                            <select name="status_id" id="" class="form-control">
+                                                <option value="">select</option>
+                                                @foreach ($status as $data)
+                                                <option value='{{$data->id}}'>
+                                                    {{ $data->name }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <hr>
+                                <h1 style="background-color: #CCC;">Second</h1>
+                                <div class="row justify-content-between Services_Container">
+                                    <div class="  col-sm-6 col-md-5  d-flex">
+                                        <label for="name"> todo status</label>
+                                        <div class="input-group">
+                                            <select name="todo_status_id" id="" class="form-control">
+                                                <option value="1">in progress </option>
+                                                <option value="2">completed</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="  col-sm-6 col-md-5  d-flex">
                                         <label for="name">Assigned to</label>
                                         <div class="input-group">
                                             <select name="assigned_to" id="" class="form-control">
@@ -222,49 +265,14 @@
                                             </select>
                                         </div>
                                     </div>
-                                    <div class="  col-sm-6 col-md-5  d-flex">
-                                        <label for="name">Activity Source</label>
-                                        <div class="input-group">
-                                            <select name="activity_source_id" id="" class="form-control">
 
-                                                @foreach ($sourses as $data)
-                                                <option value='{{$data->id}}' {{$data->id==1 ? 'selected' : '' }}>
-                                                    {{ $data->name }}</option>
-                                                @endforeach
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="servicesss  col-sm-6 col-md-5  d-flex">
-                                        <label for="name">Service 1</label>
-                                        <div class="input-group">
-                                            <select name="service_id[]" id="" class="form-control">
-                                                <option value="">Servvvice</option>
-                                                @foreach ($services1 as $data)
-                                                <option value='{{$data->id}}'>
-                                                    {{ $data->text }}</option>
-                                                @endforeach
-                                            </select>
-                                        </div>
-                                    </div>
                                     <div class="  col-sm-6 col-md-5  d-flex">
-                                        <label for="name"> todo status</label>
+                                        <label for="name">max todo date</label>
                                         <div class="input-group">
-                                            <select name="todo_status_id" id="" class="form-control">
-                                                <option value="1">in progress </option>
-                                                <option value="2">completed</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="servicesss  col-sm-6 col-md-5  d-flex">
-                                        <label for="name">Service 2</label>
-                                        <div class="input-group">
-                                            <select name="service_id[]" id="" class="form-control">
-                                                <option value="">Servvvice</option>
-                                                @foreach ($services1 as $data)
-                                                <option value='{{$data->id}}'>
-                                                    {{ $data->text }}</option>
-                                                @endforeach
-                                            </select>
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="fas fa-calendar"></i></span>
+                                            </div>
+                                            <input type="text" name="max_todo_date" class="form-control" data-toggle="datepicker">
                                         </div>
                                     </div>
                                     <div class="  col-sm-6 col-md-5  d-flex">
@@ -279,45 +287,24 @@
                                             </select>
                                         </div>
                                     </div>
-
-
-                                    <div class="servicesss  col-sm-6 col-md-5 row no-gutters">
-                                        <label class="col-3" for="name">Service 3</label>
-                                        <div class="d-flex col-9 w-100 justify-content-between">
-                                            <div class="input-group">
-                                                <select name="service_id[]" id="" class="form-control">
-                                                    <option value="">Servvvice</option>
-                                                    @foreach ($services1 as $data)
-                                                    <option value='{{$data->id}}'>
-                                                        {{ $data->text}}</option>
-                                                    @endforeach
-                                                </select>
-                                            </div>
-                                            <!-- <a href="#" class="ms-btn-icon btn-info " onclick="xx('{{$services1}}')" id="Add_new_DService"><i class="fas fa-plus"></i> -->
-
-                                            </a>
-                                        </div>
-                                    </div>
+                                </div>
+                                <hr>
+                                <h1 style="background-color: #CCC;">Third</h1>
+                                <div class="row justify-content-between Services_Container">
                                     <div class="  col-sm-6 col-md-5  d-flex">
                                         <label for="name"> created by</label>
                                         <div class="input-group">
-                                            <input type="text"  readonly value="@if($row->createdBy){{$row->createdBy->name}} {{$row->createdBy->full_name}}@endif" name="created_by_user" class="form-control" placeholder="No Created User">                                            <div class="col-md-6">
+                                            <input type="text" readonly value="@if($row->createdBy){{$row->createdBy->name}} {{$row->createdBy->full_name}}@endif" name="created_by_user" class="form-control" placeholder="No Created User">
+                                            <div class="col-md-6">
 
 
+                                            </div>
                                         </div>
                                     </div>
-
-
-
-
-
-
-                                </div>
-                                <div class="row justify-content-between">
+                                    <div class="col-md-6 d-flex"></div>
                                     <div class="col-md-6 d-flex">
                                         <label class="mt-2" for="">Note</label>
                                         <div class="mx-3">
-
                                             <textarea name="notes" id="" rows="10" class=" form-control editable"></textarea>
                                         </div>
                                     </div>
@@ -333,36 +320,66 @@
                                             </div>
                                         </div>
                                     </div>
+
+                                    <!--
+                                   {{-- <div class="  col-sm-6 col-md-5  d-flex">
+                                        <label for="name">Lead Id</label>
+                                        <div class="input-group">
+
+                                            <input type="text" name="contact_id" value="{{$row->id}}" class="form-control">
+
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="  col-sm-6 col-md-5  d-flex">
+                                        <label for="name">Activity Source</label>
+                                        <div class="input-group">
+                                            <select name="activity_source_id" id="" class="form-control">
+
+                                                @foreach ($sourses as $data)
+                                                <option value='{{$data->id}}' {{$data->id==1 ? 'selected' : '' }}>
+                                                    {{ $data->name }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                    </div>--}} -->
+
+
+
+
+
+
+
+
+                                    <div class="input-group d-flex justify-content-end text-center">
+                                        <a href="{{ route('lead.show',$row->id) }}" class="btn btn-dark mx-2"> Cancel </a>
+                                        <input type="submit" value="Save" class="btn btn-success ">
+                                    </div>
                                 </div>
-                                <div class="input-group d-flex justify-content-end text-center">
-                                    <a href="{{ route('lead.show',$row->id) }}" class="btn btn-dark mx-2"> Cancel </a>
-                                    <input type="submit" value="Save" class="btn btn-success ">
-                                </div>
+
+                            </form>
+
                         </div>
 
-                        </form>
-
                     </div>
-
                 </div>
             </div>
         </div>
-    </div>
 
-    <script>
-        function xx(myArry) {
+        <script>
+            function xx(myArry) {
 
-            //  e.preventDefault();
-            serviceSNum++;
+                //  e.preventDefault();
+                serviceSNum++;
 
-            $.ajax({
-                url: "{{route('dynamicService.fetch')}}",
-                method: "get",
+                $.ajax({
+                    url: "{{route('dynamicService.fetch')}}",
+                    method: "get",
 
-                success: function(result) {
+                    success: function(result) {
 
-                    $('#Add_new_DService').parents('.servicesss').append(
-                        `
+                        $('#Add_new_DService').parents('.servicesss').append(
+                            `
        <div class="w-100"></div>
        <div class="mb-1 addeddd w-100 row no-gutters">
          <label class="col-3" for="name">Service ${serviceSNum}</label>
@@ -383,14 +400,14 @@
        </div>
      </div>
        `
-                    )
-                }
+                        )
+                    }
 
-            })
+                })
 
 
 
-        }
-    </script>
+            }
+        </script>
 
-    @endsection
+        @endsection

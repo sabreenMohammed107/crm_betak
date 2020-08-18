@@ -34,7 +34,7 @@
                     <div class="ms-auth-container row">
 
 
-                        <div class="col-md-6">
+                    {{-- <div class="col-md-6">
                         <label> img_lead </label>
                       <div class="form-group">
                         <div id="uploadTwo" class="img-upload">
@@ -45,19 +45,18 @@
                           </div>
                         </div>
                       </div>
-                        </div>
-                        <div class="col-md-6">
+                        </div>--}}
+                       <div class="col-md-6">
                             <label>lead Name </label>
                             <div class="form-group d-flex">
-                                <select name="title_id" id="">
-                                    <option value="">select</option>
+{{--                                    <option value="">select</option>
                                     @foreach ($titles as $data)
                                     <option value='{{$data->id}}'>
                                         {{ $data->name }}</option>
                                     @endforeach
 
 
-                                </select>
+                                </select>--}}
                                 <input type="text" name="name" class="ml-1 form-control" value="" placeholder="Name">
                             </div>
                         </div>
@@ -69,11 +68,18 @@
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label class="exampleInputPassword1" for="exampleCheck1">*lead Secondary Mobile </label>
+                                <label class="exampleInputPassword1" for="exampleCheck1">lead Secondary Mobile </label>
                                 <input type="text" id="SecondaryMobile" name="secondry_mobile" class="form-control" placeholder="Secondary Mobile">
                             </div>
                         </div>
                         <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="exampleInputPassword1" for="exampleCheck1">Education </label>
+                                <input type="text" id="education" value="طالب" name="education" class="form-control" placeholder="Education">
+                            </div>
+                        </div>
+                        <!--
+                       {{-- <div class="col-md-6">
                             <div class="form-group">
                                 <label class="exampleInputPassword1" for="exampleCheck1">*lead Phone </label>
                                 <input type="text" id="phone" name="phone" class="form-control" placeholder="Phone">
@@ -141,12 +147,12 @@
                                 <label class="exampleInputPassword1" for="exampleCheck1">lead Address </label>
                                 <input type="text" id="address" name="address" class="form-control" placeholder="lead Address">
                             </div>
-                        </div>
+                        </div>--}}-->
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label>lead Country</label>
                                 <select name="country_id" class="form-control" id="">
-                                    <option value="">select</option>
+                                    <!-- <option value="">select</option> -->
                                     @foreach ($countries as $data)
                                     <option value='{{$data->id}}'>
                                         {{ $data->name }}</option>
@@ -160,7 +166,7 @@
                             <div class="form-group">
                                 <label> lead City</label>
                                 <select name="city_id" class="form-control" id="">
-                                    <option value="">select</option>
+                                    <!-- <option value="">select</option> -->
                                     @foreach ($cities as $data)
                                     <option value='{{$data->id}}'>
                                         {{ $data->name }}</option>
@@ -169,7 +175,8 @@
                                 </select>
                             </div>
                         </div>
-                        <div class="col-md-6">
+                        <!--
+                      {{--  <div class="col-md-6">
                             <div class="form-group">
                                 <label>lead Nationality </label>
                                 <select name="nationality_id" class="form-control" id="">
@@ -180,18 +187,20 @@
                                     @endforeach
                                 </select>
                             </div>
-                        </div>
+                        </div>--}} -->
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label>Customer Type </label>
                                 <select name="customer_type" class="form-control" id="">
+                                    
                                     <option value="1">indivdual</option>
                                     <option value="2">company</option>
 
                                 </select>
                             </div>
                         </div>
-                        <div class="col-md-6">
+                        <!--
+                      {{-- <div class="col-md-6">
                             <div class="form-group">
                                 <label> Assigned To </label>
                                 <select name="assigned_to" class="form-control" id="">
@@ -219,7 +228,7 @@
                                 <label class="exampleInputPassword1" for="exampleCheck1">lead Identity </label>
                                 <input type="text" id="Identity" name="identity" class="form-control" placeholder="lead Identity">
                             </div>
-                        </div>
+                        </div>--}} -->
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label class="exampleInputPassword1" for="exampleCheck1">Created By</label>
@@ -227,7 +236,8 @@
                                 <input type="hidden"  value="{{ Auth::user()->id }}" name="created_by_user">
                             </div>
                         </div>
-                        <div class="col-md-6">
+                        <!--
+                       {{-- <div class="col-md-6">
                             <label> img_identity </label>
                             <div class="form-group">
                                 <div id="uploadOne" class="img-upload">
@@ -238,7 +248,7 @@
                                     </div>
                                 </div>
                             </div>  
-                        </div>
+                        </div>--}}-->
                     </div>
                     <div class="input-group d-flex justify-content-end text-center">
                   <a href="{{ route('lead.index') }}" class="btn btn-dark mx-2"> Cancel</a>

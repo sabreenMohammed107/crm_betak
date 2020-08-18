@@ -13,19 +13,19 @@
 
   <ul class="ms-nav-list ms-inline mb-0" id="ms-nav-options">
     <li class="ms-nav-item  quick-call  mt-2">
-      <a href="bulk-search.html" class="">
+      <!-- <a href="bulk-search.html" class="">
         <span class="text-dark"><i class="material-icons fs-16">search</i><b>{{ __('links.msearch') }} </b></span>
-      </a>
+      </a> -->
     </li>
     <li class="ms-nav-item  quick-call  mt-2">
-      <a href="Qkcall.html" class="">
+      <!-- <a href="Qkcall.html" class="">
         <span class="text-dark"><i class="material-icons fs-16">call</i><b>{{ __('links.qkCall') }}</b></span>
-      </a>
+      </a> -->
     </li>
     <li class="ms-nav-item dropdown ms-search-form">
       <form class="ms-form" method="post">
         <div class="ms-form-group my-0 mb-0 has-icon fs-14">
-          <input type="search" class="ms-form-input" id="quickCallSearch" name="search" placeholder="Search here..." value="">
+          <!-- <input type="search" class="ms-form-input" id="quickCallSearch" name="search" placeholder="Search here..." value=""> -->
           <!-- <button type="submit" class="search-btn"><i class="flaticon-search text-disabled"></i></button> -->
         </div>
       </form>
@@ -102,7 +102,7 @@
       </ul>
     </li>
     <li class="ms-nav-item  mt-2">
-      <div class='switch'>
+      <div class='switch' style="display: none;">
         <div class='quality'>
           <input checked id='q1' name='q' type='radio' value='q1'>
           <label for='q1'>EN</label>
@@ -115,9 +115,9 @@
     </li>
 
     <li class="ms-nav-item dropdown mt-2">
-      <a href="#" class="text-disabled ms-has-notification" id="mailDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      <!-- <a href="#" class="text-disabled ms-has-notification" id="mailDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
         <span>10</span>
-        <i class="flaticon-speech-bubble"></i></a>
+        <i class="flaticon-speech-bubble"></i></a> -->
       <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="mailDropdown">
         <li class="dropdown-menu-header">
           <h6 class="dropdown-header ms-inline m-0"><span class="text-disabled">Messages</span></h6><span class="badge badge-pill badge-success">3 New</span>
@@ -153,15 +153,15 @@
           </a>
         </li>
         <li class="dropdown-menu-footer text-center">
-          <a href="chat.html">{{ __('links.allMessages') }} </a>
+          <!-- <a href="chat.html">{{ __('links.allMessages') }} </a> -->
         </li>
       </ul>
     </li>
 
     <li class="ms-nav-item dropdown mt-2">
-      <a href="#" class="text-disabled ms-has-notification" id="notificationDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      <!-- <a href="#" class="text-disabled ms-has-notification" id="notificationDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
         <span>36</span>
-        <i class="flaticon-bell"></i></a>
+        <i class="flaticon-bell"></i></a> -->
       <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="notificationDropdown">
         <li class="dropdown-menu-header">
           <h6 class="dropdown-header ms-inline m-0"><span class="text-disabled">Notifications</span></h6><span class="badge badge-pill badge-info">4 New</span>
@@ -195,7 +195,7 @@
         </li>
         <li class="dropdown-divider"></li>
         <li class="dropdown-menu-footer text-center">
-          <a href="notifications.html">{{ __('links.allNotifications') }} </a>
+          <!-- <a href="notifications.html">{{ __('links.allNotifications') }} </a> -->
         </li>
       </ul>
     </li>

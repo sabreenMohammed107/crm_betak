@@ -13,7 +13,7 @@ class Contact extends Model
         'title_id', 'name', 'email', 'primary_mobile', 'secondry_mobile', 'phone','company_id', 'whatsapp','facebook',
         'fb_account', 'website', 'address', 'birthdate', 'country_id', 'city_id', 'nationality_id',
         'job', 'company', 'contact_type', 'assigned_to', 'reach_source_id', 'image','customer_type', 'identity',
-        'identity_path', 'status_id','created_by_user'
+        'identity_path', 'status_id','created_by_user','education'
     ];
     
     public function title()
@@ -52,6 +52,10 @@ class Contact extends Model
     public function status()
     {
         return $this->belongsTo('App\Status','status_id');
+    }
+    public function activity()
+    {
+        return $this->hasMany('App\Contact_activity','contact_id','id');
     }
    
 }

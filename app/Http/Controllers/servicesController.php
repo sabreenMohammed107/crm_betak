@@ -62,7 +62,6 @@ class servicesController extends Controller
         $this->validate($request,[
             'text' => 'required',
            'service_type' => 'required',
-           'description' => 'required',
         ]);
 
         $input = $request->all();

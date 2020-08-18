@@ -27,7 +27,7 @@
   </div>
   <div class="convert">
     <!-- <a href="#" class="btn btn-dark" data-toggle="modal" data-target="#addservicToClient"> Convert to client </a> -->
-    <a href="#" onclick="confirrm('convert to client','{{$row->id}}')" class="btn btn-dark">{{ __('Convert to client') }} </a>
+    {{--<a href="#" onclick="confirrm('convert to client','{{$row->id}}')" class="btn btn-dark">{{ __('Convert to client') }} </a>--}}
            
 <form id="convert_{{$row->id}}" action="{{ route('convert-to-client') }}"  method="POST" style="display: none;">
 @csrf
@@ -36,7 +36,7 @@
 </form>
   </div>
   <div class="img-holder">
-    <img src="{{ asset('uploads/')}}/{{ $row->image }}" alt="">
+    <img src="@if($row->image){{ asset('uploads/')}}/{{ $row->image }} @else {{ asset('assets/img/default-user.gif')}} @endif" alt="">
   </div>
 </div>
 <div class="row">
@@ -50,18 +50,25 @@
         </span>
       </span>
       <a href="#" class="list-group-item">
-        <b>ID: </b> {{$row->identity}}
+        <b>ID: </b> {{$row->id}}
+      </a>
+      <a href="#" class="list-group-item">
+        <b>Name: </b> {{$row->name}}
+      </a>
+      <a href="#" class="list-group-item">
+        <b>Primary Mobile: </b> {{$row->primary_mobile}}
       </a>
       <a href="#" class="list-group-item">
         <b>Secondary Mobile: </b> {{$row->secondry_mobile}}
       </a>
-
+ <!--
+    {{--
       <a href="#" class="list-group-item">
         <b>DOB: </b> {{$row->birthdate}}
       </a>
       <a href="#" class="list-group-item">
         <b>Address: </b> {{$row->address}}
-      </a>
+      </a>--}} -->
       <a href="#" class="list-group-item">
         <b>Country Id: </b> @if($row->country){{$row->country->name}} @endif
       </a>
@@ -74,17 +81,18 @@
       <a href="#" class="list-group-item">
         <b>JOB: </b> {{$row->job}}
       </a>
-      <a href="#" class="list-group-item">
+      <!--
+     {{-- <a href="#" class="list-group-item">
         <b>Company: </b> {{$row->company}}
-      </a>
+      </a>--}} -->
       <a href="#" class="list-group-item">
-        <b>Customer Type: </b> {{$row->birthdate}}
+        <b>Customer Type: </b> @if($row->customer_type==1)Indivdual @else Company @endif
       </a>
       <a href="#" class="list-group-item">
         <b>Reach Source : </b> @if($row->reach){{$row->reach->name}} @endif
       </a>
       <a href="#" class="list-group-item">
-        <b>Contact Status Id : </b> @if($row->status){{$row->status->id}} @endif
+        <b>Created By : </b> {{$row->createdBy->name ?? ''}}
       </a>
 
     </div>

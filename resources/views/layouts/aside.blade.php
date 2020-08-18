@@ -39,7 +39,7 @@
 
   <!--  Sending  -->
     <!-- Clients  -->
-    <li class="menu-item">
+    {{--<li class="menu-item">
         <a href="#" class="has-chevron" data-toggle="collapse" data-target="#contactsdropdown" aria-expanded="false" aria-controls="contactsdropdown">
         <span><i class="material-icons fs-16">assignment</i>{{ __('links.clients') }}</span>
       </a>
@@ -47,7 +47,7 @@
           <li> <a href="{{ route('client.index')}}">{{ __('links.clients') }}</a> </li>
          
         </ul>
-      </li>
+      </li>--}}
     <!--  Clients  -->
     <!-- Leads  -->
     <li class="menu-item">

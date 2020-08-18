@@ -35,4 +35,7 @@
     <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('assets/img/logoIcon.png')}}">
 
     <!-- Styles -->
+    <!-- Latest compiled and minified CSS -->
+    <link href="{{ asset('assets/css/selectstyle.css')}}" rel="stylesheet" type="text/css">
+
 </head>

@@ -105,6 +105,7 @@ class LeadController extends Controller
             'contact_type' => $request->input('contact_type'),
             'identity' => $request->input('identity'),
             'created_by_user' => $request->input('created_by_user'),
+            'education'=>$request->input('education')
 
         ];
 
@@ -178,7 +179,7 @@ class LeadController extends Controller
         $nationalities = Nationality::where('company_id', '=', $this->user->company_id)->get();
         $users = User::where('company_id', '=', $this->user->company_id)->get();
         $reachs = Reach_Source::where('company_id', '=', $this->user->company_id)->get();
-        $activities = Contact_activity::where('contact_id', '=', $id)->get();
+        $activities = Contact_activity::where('contact_id', '=', $id)->orderBy("created_at", "Desc")->get();
         return view($this->viewName . 'view', compact('row', 'titles','activities', 'countries', 'cities', 'nationalities', 'users', 'reachs'));
     }
 public function convertToClient(Request $request){
@@ -442,9 +443,7 @@ public function convertToClient(Request $request){
         $activities = Activity::where('company_id', '=', $this->user->company_id)->get();
         $sourses = Activity_source::where('company_id', '=', $this->user->company_id)->get();
         $services = Activity_service::where('activity_id', '=', $id)->orderBy("created_at", "Desc")->get();
-        foreach($services as $serv){
-
-        }
+        
         $tags = $activity->service;
         // dd($tags[0]['text']);
         return view($this->viewName . 'editActivity', compact('activity','tags', 'row', 'sourses', 'activities', 'status', 'asigns', 'services1', 'solved'));

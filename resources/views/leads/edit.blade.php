@@ -40,7 +40,7 @@
                             <label> img_lead </label>
                             <div class="form-group">
                                 <div id="uploadTwo" class="img-upload">
-                                    <img src="{{ asset('uploads/')}}/{{ $row->image }}" alt="">
+                                    <img src="@if($row->image){{ asset('uploads/')}}/{{ $row->image }} @else {{ asset('assets/img/default-user.gif')}} @endif" alt="">
                                     <div class="upload-icon">
                                         <input type="file" name="image" class="upload">
                                         <i class="fas fa-camera    "></i>

@@ -34,12 +34,13 @@
                         <thead>
                             <tr>
                                 <th scope="col">#</th>
-                                <th scope="col"></th>
+                                <!-- <th scope="col"></th> -->
                                 <th scope="col">name</th>
-                                <th scope="col">phone</th>
-
+                                <th scope="col">Primary Mobile</th>
+                              
                                 <th scope="col">Last Activity Date </th>
-                                <th scope="col">Assigned To</th>
+                                <th scope="col">Last Activity Notes </th>
+                                <th scope="col">Created By</th>
                                 <!-- <th scope="col">Main Service</th> -->
                                 <!-- <th scope="col">Created By</th> -->
 
@@ -50,20 +51,27 @@
                             @foreach($rows as $index => $row)
                             <tr>
                                 <td>{{$index+1}}</td>
-                                <th scope="row"><img src="{{ asset('uploads/')}}/{{ $row->image }}" alt=""></th>
+                                {{--<th scope="row"><img src="@if($row->image){{ asset('uploads/')}}/{{ $row->image }} @else {{ asset('assets/img/default-user.gif')}} @endif" alt=""></th>--}}
                                 <td>{{$row->name}}</td>
-                                <td>{{$row->phone}}</td>
-                                <td> <?php $date = date_create($row->created_date) ?>
+                                <td>{{$row->primary_mobile}}</td>
+                                <td> <?php 
+                                $date=now();
+                                if($row->activity->last()){
+                                    $date = date_create($row->activity->last()->activity_date);
+                                }
+                                ?>
                                     {{ date_format($date,"d-m-Y") }} </td>
-                                <td> @if($row->assign)
-                                    {{$row->assign->name}}
+                                    <td style="width: 30%;"> 
+                                 {{ $row->activity->last()->notes ?? '' }} </td>
+                                <td> @if($row->createdBy)
+                                    {{$row->createdBy->name}}
                                     @endif
                                 </td>
 
                                 <td>
-                                <a href="{{ route('lead.edit',$row->id) }}" class="btn d-inline-block btn-info">Edit</a>
+                                <a href="{{ route('lead.edit',$row->id) }}" class="btn d-inline-block btn-info">Edit Lead</a>
 
-                                    <a href="{{ route('lead.show',$row->id) }}" class="btn d-inline-block btn-info">view</a></td>
+                                    <a href="{{ route('lead.show',$row->id) }}" class="btn d-inline-block btn-info">view Activity</a></td>
                             </tr>
                             @endforeach
                         </tbody>

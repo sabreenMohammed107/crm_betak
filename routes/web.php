@@ -48,9 +48,9 @@ Route::get('add-lead-activity/{id}', 'LeadController@addActivity')->name('add-le
 Route::post('saveLeadActivity', 'LeadController@saveActivity')->name('saveLeadActivity');
 Route::get('dynamicServiceLead/fetch', 'LeadController@dynamicService')->name('dynamicServiceLead.fetch');
 Route::post('convert-to-client', 'LeadController@convertToClient')->name('convert-to-client');
-Route::delete('delete-lead-activity/{id}', 'ClientController@deleteActivity')->name('delete-lead-activity');
-Route::get('edit-lead-activity/{id}', 'ClientController@editActivity')->name('edit-lead-activity');
-Route::post('update-lead-activity', 'ClientController@updateActivity')->name('update-lead-activity');
+Route::delete('delete-lead-activity/{id}', 'LeadController@deleteActivity')->name('delete-lead-activity');
+Route::get('edit-lead-activity/{id}', 'LeadController@editActivity')->name('edit-lead-activity');
+Route::post('update-lead-activity', 'LeadController@updateActivity')->name('update-lead-activity');
 /*--------------------fqa-----------------------*/
 Route::resource('fqa', 'FqaController');
 
