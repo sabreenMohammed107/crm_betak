@@ -163,7 +163,7 @@
                                         <label for="name">Service 1</label>
                                         <div class="input-group">
 
-                                            <select theme="google" class="selectxx" name="service_id[]" width="400" style="" placeholder="Select Servvvice" data-search="true">
+                                            <select  class="form-control" name="service_id[]" width="400" style=""  data-search="true">
 
                                                 <option value="">Servvvice</option>
                                                 @foreach ($services1 as $data)
@@ -187,7 +187,7 @@
                                     <div class="  col-sm-6 col-md-5  d-flex">
                                         <label for="name">Service 2</label>
                                         <div class="input-group">
-                                        <select theme="google" class="selectxx" name="service_id[]" width="400" style="" placeholder="Select Servvvice" data-search="true">
+                                        <select  class="form-control" name="service_id[]" width="400" style="" placeholder="Select Servvvice" data-search="true">
                                                 @foreach ($services1 as $data)
                                                 <option value='{{$data->id}}'>
                                                     {{ $data->text }}</option>
@@ -209,7 +209,7 @@
                                     <div class="col-sm-6 col-md-5  d-flex">
                                         <label for="name">Service 3</label>
                                         <div class="input-group">
-                                        <select theme="google" class="selectxx" name="service_id[]" width="400" style="" placeholder="Select Servvvice" data-search="true">
+                                        <select  class="form-control" name="service_id[]" width="400" style="" placeholder="Select Servvvice" data-search="true">
                                                 @foreach ($services1 as $data)
                                                 <option value='{{$data->id}}'>
                                                     {{ $data->text}}</option>

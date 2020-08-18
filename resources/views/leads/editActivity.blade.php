@@ -156,8 +156,9 @@
                                     <div class="servicesss  col-sm-6 col-md-5  d-flex">
                                     <label for="name">Service 1</label>
                                     <div class="input-group">
-                                    <select theme="google" class="selectxx" name="service_id[]" width="400" style="" placeholder="@if(!(isset($tags[0]))) @else{{ $tags[0]['text']}} @endif" data-search="true">
-                                        @if((isset($tags[0])&& $tags['0'] !==null))
+                                    <select  class="form-control " name="service_id[]"   data-search="true">
+                                       
+                                    @if((isset($tags[0])&& $tags['0'] !==null))
                                         <option value=''>select</option>
                                         @endif
                                             @foreach ($services1 as $data)
@@ -180,8 +181,9 @@
                                     <div class="servicesss  col-sm-6 col-md-5  d-flex">
                                     <label for="name">Service 2</label>
                                     <div class="input-group">
-                                    <select theme="google" class="selectxx" name="service_id[]" width="400" style="" placeholder="@if(!(isset($tags[1])&& $tags['1'] !==null)) @else{{ $tags[1]['text']}} @endif" data-search="true">
-                                        @if(!(isset($tags[1])&& $tags['1'] !==null))
+                                    <select  class="form-control " name="service_id[]"  placeholder="@if(!(isset($tags[1])&& $tags['1'] !==null)) @else{{ $tags[1]['text']}} @endif" data-search="true">
+                                       
+                                    @if(!(isset($tags[1])&& $tags['1'] !==null))
                                         <option value=''>select</option>
                                         @endif
                                             @foreach ($services1 as $data)
@@ -205,10 +207,11 @@
                                         </div>
                                     </div>
                                     <div class="servicesss  col-sm-6 col-md-5  d-flex">
-                                    <label for="name">Service 2</label>
+                                    <label for="name">Service 3</label>
                                     <div class="input-group">
-                                    <select theme="google" class="selectxx" name="service_id[]" width="400" style="" placeholder=" @if(!(isset($tags[2])&& $tags['2'] !==null)) @else{{ $tags[2]['text']}} @endif" data-search="true">
-                                         @if(!(isset($tags[2])&& $tags['2'] !==null))
+                                    <select  class="form-control" name="service_id[]" width="400" style="" placeholder=" @if(!(isset($tags[2])&& $tags['2'] !==null)) @else{{ $tags[2]['text']}} @endif" data-search="true">
+                                        
+                                    @if(!(isset($tags[2])&& $tags['2'] !==null))
                                         <option value=''>select</option>
                                         @endif
                                                 @foreach ($services1 as $data)

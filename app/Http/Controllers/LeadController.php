@@ -345,7 +345,7 @@ public function convertToClient(Request $request){
     {
         $row = Contact::find($id);
         $solved = User::where('company_id', '=', $this->user->company_id)->get();
-        $services1 = Service::where('company_id', '=', $this->user->company_id)->get();
+        $services1 = Service::where('company_id', '=', $this->user->company_id)->orderBy("text", "asc")->get();
         $asigns = User::where('company_id', '=', $this->user->company_id)->get();
         $status = Status::where('company_id', '=', $this->user->company_id)->get();
         $activities = Activity::where('company_id', '=', $this->user->company_id)->get();
@@ -396,6 +396,7 @@ public function convertToClient(Request $request){
             $data['todo_status_id'] = $request->input('todo_status_id');
         }
         $all_services = [];
+        
 
         foreach ($request->input('service_id') as $image) {
 
@@ -437,7 +438,7 @@ public function convertToClient(Request $request){
         $rowId = $activity->contact_id;
         $row = Contact::find($rowId);
         $solved = User::where('company_id', '=', $this->user->company_id)->get();
-        $services1 = Service::where('company_id', '=', $this->user->company_id)->get();
+        $services1 = Service::where('company_id', '=', $this->user->company_id)->orderBy("text", "asc")->get();
         $asigns = User::where('company_id', '=', $this->user->company_id)->get();
         $status = Status::where('company_id', '=', $this->user->company_id)->get();
         $activities = Activity::where('company_id', '=', $this->user->company_id)->get();
@@ -527,6 +528,7 @@ public function convertToClient(Request $request){
         }
 
         //passing parameter to transaction
+    
         DB::transaction(function () use ($data, $all_services, $updatedId) {
 
             $activity = Contact_activity::where('id', '=', $updatedId)->first();

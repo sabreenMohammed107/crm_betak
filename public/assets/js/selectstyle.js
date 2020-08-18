@@ -7,7 +7,11 @@
 		var defaults = {
 			width  : 250,
 			height : 300,
-			theme  : 'light'
+			theme  : 'light',
+			placeholder: {
+				id: '-1', // the value of the option
+				text: 'Select an option'
+			  }
 		},
 		setting = $.extend({}, defaults, option);
 		this.each(function(){
