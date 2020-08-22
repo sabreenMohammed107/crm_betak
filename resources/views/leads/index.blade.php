@@ -25,7 +25,7 @@
         <div class="ms-panel">
             <div class="ms-panel-header d-flex justify-content-between">
                 <h6>Leads</h6>
-                <a href="{{ route('lead.create') }}" class="btn btn-dark" > add new </a>
+                <a href="{{ route('lead.create') }}" class="btn btn-dark"> add new </a>
             </div>
             <div class="ms-panel-body">
 
@@ -37,7 +37,7 @@
                                 <!-- <th scope="col"></th> -->
                                 <th scope="col">name</th>
                                 <th scope="col">Primary Mobile</th>
-                              
+
                                 <th scope="col">Last Activity Date </th>
                                 <th scope="col">Last Activity Notes </th>
                                 <th scope="col">Created By</th>
@@ -54,24 +54,32 @@
                                 {{--<th scope="row"><img src="@if($row->image){{ asset('uploads/')}}/{{ $row->image }} @else {{ asset('assets/img/default-user.gif')}} @endif" alt=""></th>--}}
                                 <td>{{$row->name}}</td>
                                 <td>{{$row->primary_mobile}}</td>
-                                <td> <?php 
-                                $date=now();
-                                if($row->activity->last()){
-                                    $date = date_create($row->activity->last()->activity_date);
-                                }
-                                ?>
+                                <td> <?php
+                                        $date = now();
+                                        if ($row->activity->last()) {
+                                            $date = date_create($row->activity->last()->activity_date);
+                                        }
+                                        ?>
                                     {{ date_format($date,"d-m-Y") }} </td>
-                                    <td style="width: 30%;"> 
-                                 {!! $row->activity->last()->notes ?? '' !!} </td>
+                                <td style="width: 30%;">
+                                    {!! $row->activity->last()->notes ?? '' !!} </td>
                                 <td> @if($row->createdBy)
                                     {{$row->createdBy->name}}
                                     @endif
                                 </td>
 
                                 <td>
-                                <a href="{{ route('lead.edit',$row->id) }}" class="btn d-inline-block btn-info">Edit Lead</a>
+                                    <a href="{{ route('lead.edit',$row->id) }}" class="btn d-inline-block btn-info">Edit Lead</a>
 
-                                    <a href="{{ route('lead.show',$row->id) }}" class="btn d-inline-block btn-info">view Activity</a></td>
+                                    <a href="{{ route('lead.show',$row->id) }}" class="btn d-inline-block btn-info">view Activity</a>
+                                <a href="#" onclick="destroy('this Lead', '{{$row->id}}')" class="btn d-inline-block btn-danger">{{ __('links.delete') }} </a>
+
+                                <form id="delete_{{$row->id}}" action="{{ route('lead.destroy', $row->id) }}" method="POST" style="display: none;">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" value=""></button>
+                                </form>
+                                </td>
                             </tr>
                             @endforeach
                         </tbody>
@@ -168,7 +176,7 @@
                                     <div class="form-group">
                                         <label>lead Country</label>
                                         <select name="country_id" class="form-control" id="">
-                                        <option value="">select</option>
+                                            <option value="">select</option>
                                             @foreach ($countries as $data)
                                             <option value='{{$data->id}}'>
                                                 {{ $data->name }}</option>
@@ -182,7 +190,7 @@
                                     <div class="form-group">
                                         <label> lead City</label>
                                         <select name="city_id" class="form-control" id="">
-                                        <option value="">select</option>
+                                            <option value="">select</option>
                                             @foreach ($cities as $data)
                                             <option value='{{$data->id}}'>
                                                 {{ $data->name }}</option>
@@ -195,7 +203,7 @@
                                     <div class="form-group">
                                         <label>lead Nationality </label>
                                         <select name="nationality_id" class="form-control" id="">
-                                        <option value="">select</option>
+                                            <option value="">select</option>
                                             @foreach ($nationalities as $data)
                                             <option value='{{$data->id}}'>
                                                 {{ $data->name }}</option>
@@ -217,7 +225,7 @@
                                     <div class="form-group">
                                         <label> Assigned To </label>
                                         <select name="assigned_to" class="form-control" id="">
-                                        @foreach ($users as $data)
+                                            @foreach ($users as $data)
                                             <option value='{{$data->id}}'>
                                                 {{ $data->name }}</option>
                                             @endforeach
@@ -229,7 +237,7 @@
                                     <div class="form-group">
                                         <label>Reach Source </label>
                                         <select name="reach_source_id" class="form-control" id="">
-                                        @foreach ($reachs as $data)
+                                            @foreach ($reachs as $data)
                                             <option value='{{$data->id}}'>
                                                 {{ $data->name }}</option>
                                             @endforeach
