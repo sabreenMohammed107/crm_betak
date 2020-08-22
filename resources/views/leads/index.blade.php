@@ -69,10 +69,11 @@
                                 </td>
 
                                 <td>
-                                    <a href="{{ route('lead.edit',$row->id) }}" class="btn d-inline-block btn-info">Edit Lead</a>
+                                <a href="{{ route('lead.show',$row->id) }}" style="padding: 5px;background:light"><i class="fa fa-file" aria-hidden="true"></i> </a>
 
-                                    <a href="{{ route('lead.show',$row->id) }}" class="btn d-inline-block btn-info">view Activity</a>
-                                <a href="#" onclick="destroy('this Lead', '{{$row->id}}')" class="btn d-inline-block btn-danger">{{ __('links.delete') }} </a>
+                                    <a href="{{ route('lead.edit',$row->id) }}"  style="padding: 5px;background:light"><i class="fas fa-pencil-alt " ></i></a>
+
+                                <a href="#" onclick="destroy('this Lead', '{{$row->id}}')" style="padding: 5px;background:light"><i class="far fa-trash-alt"></i> </a>
 
                                 <form id="delete_{{$row->id}}" action="{{ route('lead.destroy', $row->id) }}" method="POST" style="display: none;">
                                     @csrf

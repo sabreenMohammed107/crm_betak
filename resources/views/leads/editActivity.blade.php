@@ -93,7 +93,7 @@
                                 <input type="hidden" name="updatedId" value="{{$activity->id}}">
                                 <input type="hidden" name="contact_id" value="{{$row->id}}">
 
-                                <h1 style="background-color: #CCC;">Activity data</h1>
+                                <h1 style="background-color: #000000;color:#fff">Activity data</h1>
                                 <div class="row justify-content-between Services_Container">
 
                                 <div class="  col-sm-6 col-md-5  d-flex">
@@ -159,7 +159,7 @@
                                     <select  class="form-control " name="service_id[]"   data-search="true">
                                        
                                     @if((isset($tags[0])&& $tags['0'] !==null))
-                                        <option value=''>select</option>
+                                        <option value=''></option>
                                         @endif
                                             @foreach ($services1 as $data)
                                             <option value='{{$data->id}}' {{ (isset($tags[0])&& $tags[0]['id']==$data->id)?'selected':''}}>
@@ -184,7 +184,7 @@
                                     <select  class="form-control " name="service_id[]"   data-search="true">
                                        
                                     @if(!(isset($tags[1])&& $tags['1'] !==null))
-                                        <option value=''>select</option>
+                                        <option value=''></option>
                                         @endif
                                             @foreach ($services1 as $data)
                                             <option value='{{$data->id}}' {{ (isset($tags[1])&& $tags[1]['id']==$data->id)?'selected':''}}>
@@ -212,7 +212,7 @@
                                     <select  class="form-control" name="service_id[]" width="400"  data-search="true">
                                         
                                     @if(!(isset($tags[2])&& $tags['2'] !==null))
-                                        <option value=''>select</option>
+                                        <option value=''></option>
                                         @endif
                                                 @foreach ($services1 as $data)
                                                 <option value='{{$data->id}}' {{ (isset($tags[2])&& $tags[2]['id']==$data->id)?'selected':''}}>
@@ -246,7 +246,7 @@
                                     </div>
                                     </div>
                                 <hr>
-                                <h1 style="background-color: #CCC;">Todo data</h1>
+                                <h1 style="background-color: #000000;color:#fff">Todo data</h1>
                                 <div class="row justify-content-between Services_Container">
                                 <div class="  col-sm-6 col-md-5  d-flex">
                                     <label for="name"> todo status</label>
@@ -293,13 +293,13 @@
                                 </div>
                                 </div>
                                 <hr>
-                                <h1 style="background-color: #CCC;">Activity notes</h1>
+                                <h1 style="background-color: #000000;color:#fff">Activity notes</h1>
                                 <div class="row justify-content-between Services_Container">
  
                                 <div class="  col-sm-6 col-md-5  d-flex">
                                         <label for="name"> created by</label>
                                         <div class="input-group">
-                                            <input type="text"  readonly value="@if($row->createdBy){{$row->createdBy->name}} {{$row->createdBy->full_name}}@endif" name="created_by_user" class="form-control" placeholder="No Created User">                                            <div class="col-md-6">
+                                            <input type="text"  readonly value="@if($row->createdBy){{$row->createdBy->name}} @endif" name="created_by_user" class="form-control" placeholder="No Created User">                                            <div class="col-md-6">
 
 
                                         </div>

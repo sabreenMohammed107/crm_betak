@@ -8,7 +8,7 @@
 <nav aria-label="breadcrumb">
   <ol class="breadcrumb">
     <li class="breadcrumb-item"><a href="{{ route('/') }}"><i class="material-icons"></i> {{ __('links.home') }} </a></li>
-    <li class="breadcrumb-item active" aria-current="page"> {{ __('links.leads') }} </li>
+    <li class="breadcrumb-item active" aria-current="page"><a href="{{ route('lead.index') }}"> {{ __('links.leads') }} </a></li>
   </ol>
 </nav>
 
@@ -28,12 +28,12 @@
   <div class="convert">
     <!-- <a href="#" class="btn btn-dark" data-toggle="modal" data-target="#addservicToClient"> Convert to client </a> -->
     {{--<a href="#" onclick="confirrm('convert to client','{{$row->id}}')" class="btn btn-dark">{{ __('Convert to client') }} </a>--}}
-           
-<form id="convert_{{$row->id}}" action="{{ route('convert-to-client') }}"  method="POST" style="display: none;">
-@csrf
-<input type="hidden" value="{{$row->id}}" name="coverter">
-<button type="submit" value=""></button>
-</form>
+
+    <form id="convert_{{$row->id}}" action="{{ route('convert-to-client') }}" method="POST" style="display: none;">
+      @csrf
+      <input type="hidden" value="{{$row->id}}" name="coverter">
+      <button type="submit" value=""></button>
+    </form>
   </div>
   <div class="img-holder">
     <img src="@if($row->image){{ asset('uploads/')}}/{{ $row->image }} @else {{ asset('assets/img/default-user.gif')}} @endif" alt="">
@@ -61,7 +61,7 @@
       <a href="#" class="list-group-item">
         <b>Secondary Mobile: </b> {{$row->secondry_mobile}}
       </a>
- <!--
+      <!--
     {{--
       <a href="#" class="list-group-item">
         <b>DOB: </b> {{$row->birthdate}}
@@ -104,6 +104,7 @@
           <div class="ms-panel-header d-flex justify-content-between">
             <h6>ُActivities </h6>
             <a href="{{ route('add-lead-activity',$row->id) }}" class="btn btn-dark"> add Activities </a>
+            
           </div>
 
           <div class="ms-panel-body">
@@ -126,14 +127,18 @@
                   <tr>
                     <td>{{$activity->activity->name ?? ''}}</td>
                     <td>@if($activity->activity_type==2)Todo @else Event @endif</td>
-                    <td>{{$activity->activity_date}}</td>
+                    <td><?php
+                        $date = date_create($activity->activity_date);
+
+                        ?>
+                      {{ date_format($date,"d-m-Y") }}</td>
                     <td>{{$activity->status->name ?? ''}}</td>
-                    <td>@if($row->createdBy){{$row->createdBy->name}} {{$row->createdBy->full_name}}@endif</td>
+                    <td>@if($row->createdBy){{$row->createdBy->name}} @endif</td>
 
                     <td>{{$activity->notes}}</td>
                     <!-- <td>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Asperiores nobis hic sint necessitatibus autem velit in deserunt est animi. Ipsa earum quos obcaecati exercitationem soluta natus explicabo ducimus illo dolorem.</td> -->
                     <td>
-                    <a href="{{ route('edit-lead-activity',$activity->id) }}" class="btn btn-dark d-inline-block">Edit</a>
+                      <a href="{{ route('edit-lead-activity',$activity->id) }}" class="btn btn-dark d-inline-block">Edit</a>
                       <a href="#" onclick="destroy('this row','{{$activity->id}}')" class="btn d-inline-block btn-danger">delete</a>
                       <form id="delete_{{$activity->id}}" action="{{ route('delete-lead-activity', $activity->id) }}" method="POST" style="display: none;">
                         @csrf

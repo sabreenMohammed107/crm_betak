@@ -110,7 +110,7 @@
                                 {{ csrf_field() }}
                                 <input type="hidden" name="contact_type" value="0">
                                 <input type="hidden" name="contact_id" value="{{$row->id}}">
-                                <h1 style="background-color: #CCC;">Activity data</h1>
+                                <h1 style="background-color: #000000;color:#fff">Activity data</h1>
                                 <div class="row justify-content-between Services_Container">
 
 
@@ -165,7 +165,7 @@
 
                                             <select  class="form-control" name="service_id[]" width="400" style=""  data-search="true">
 
-                                                <option value="">Select</option>
+                                                <option value=""> </option>
                                                 @foreach ($services1 as $data)
                                                 <option value='{{$data->id}}'>
                                                     {{ $data->text }}</option>
@@ -188,7 +188,7 @@
                                         <label for="name">Service 2</label>
                                         <div class="input-group">
                                         <select  class="form-control" name="service_id[]" width="400"   data-search="true">
-                                        <option value="">Select</option>
+                                        <option value=""> </option>
                                         @foreach ($services1 as $data)
                                                 <option value='{{$data->id}}'>
                                                     {{ $data->text }}</option>
@@ -211,7 +211,7 @@
                                         <label for="name">Service 3</label>
                                         <div class="input-group">
                                         <select  class="form-control" name="service_id[]" width="400"  data-search="true">
-                                        <option value="">Select</option>
+                                        <option value=""> </option>
                                                 @foreach ($services1 as $data)
                                                 <option value='{{$data->id}}'>
                                                     {{ $data->text}}</option>
@@ -233,7 +233,7 @@
                                         <label for="name">Lead Status</label>
                                         <div class="input-group">
                                             <select name="status_id" id="" class="form-control">
-                                                <option value="">select</option>
+                                            <option value=""> </option>
                                                 @foreach ($status as $data)
                                                 <option value='{{$data->id}}'>
                                                     {{ $data->name }}</option>
@@ -243,7 +243,7 @@
                                     </div>
                                 </div>
                                 <hr>
-                                <h1 style="background-color: #CCC;">Todo data</h1>
+                                <h1 style="background-color: #000000;color:#fff">Todo data</h1>
                                 <div class="row justify-content-between Services_Container">
                                     <div class="  col-sm-6 col-md-5  d-flex">
                                         <label for="name"> todo status</label>
@@ -259,7 +259,7 @@
                                         <label for="name">Assigned to</label>
                                         <div class="input-group">
                                             <select name="assigned_to" id="" class="form-control">
-                                                <option value="">select</option>
+                                            <option value=""> </option>
                                                 @foreach ($asigns as $data)
                                                 <option value='{{$data->id}}'>
                                                     {{ $data->name }}</option>
@@ -281,7 +281,7 @@
                                         <label for="name"> todo solved by</label>
                                         <div class="input-group">
                                             <select name="todo_solved_by" id="" class="form-control">
-                                                <option value="">select </option>
+                                                <option value=""> </option>
                                                 @foreach ($solved as $data)
                                                 <option value='{{$data->id}}'>
                                                     {{ $data->name }}</option>
@@ -291,12 +291,12 @@
                                     </div>
                                 </div>
                                 <hr>
-                                <h1 style="background-color: #CCC;">Activity notes</h1>
+                                <h1 style="background-color: #000000;color:#fff">Activity notes</h1>
                                 <div class="row justify-content-between Services_Container">
                                     <div class="  col-sm-6 col-md-5  d-flex">
                                         <label for="name"> created by</label>
                                         <div class="input-group">
-                                            <input type="text" readonly value="@if($row->createdBy){{$row->createdBy->name}} {{$row->createdBy->full_name}}@endif" name="created_by_user" class="form-control" placeholder="No Created User">
+                                            <input type="text" readonly value="@if($row->createdBy){{$row->createdBy->name}} @endif" name="created_by_user" class="form-control" placeholder="No Created User">
                                             <div class="col-md-6">
 
 

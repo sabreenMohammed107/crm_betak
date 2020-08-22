@@ -74,8 +74,8 @@
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label class="exampleInputPassword1" for="exampleCheck1">Education </label>
-                                <input type="text" id="education" value="طالب" name="education" class="form-control" placeholder="Education">
+                                <label class="exampleInputPassword1" for="exampleCheck1">Job </label>
+                                <input type="text" id="job" value="طالب" name="job" class="form-control" placeholder="Job">
                             </div>
                         </div>
                         <!--
