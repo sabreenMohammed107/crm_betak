@@ -127,7 +127,7 @@
                     <td>{{$activity->activity->name}}</td>
                     <td>@if($activity->activity_type==2)Todo @else Event @endif</td>
                     <td>{{$activity->activity_date}}</td>
-                    <td>{{$activity->contact->status->name ?? ''}}</td>
+                    <td>{{$activity->status->name ?? ''}}</td>
                     <td>@if($row->createdBy){{$row->createdBy->name}} {{$row->createdBy->full_name}}@endif</td>
 
                     <td>{{$activity->notes}}</td>
