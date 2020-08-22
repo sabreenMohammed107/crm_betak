@@ -62,7 +62,7 @@
                                 ?>
                                     {{ date_format($date,"d-m-Y") }} </td>
                                     <td style="width: 30%;"> 
-                                 {{ $row->activity->last()->notes ?? '' }} </td>
+                                 {!! $row->activity->last()->notes ?? '' !!} </td>
                                 <td> @if($row->createdBy)
                                     {{$row->createdBy->name}}
                                     @endif
