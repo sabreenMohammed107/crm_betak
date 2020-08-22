@@ -345,7 +345,7 @@ public function convertToClient(Request $request){
     {
         $row = Contact::find($id);
         $solved = User::where('company_id', '=', $this->user->company_id)->get();
-        $services1 = Service::where('company_id', '=', $this->user->company_id)->orderBy("text", "asc")->get();
+        $services1 = Service::where('company_id', '=', $this->user->company_id)->where('service_type','=',0)->orderBy("text", "asc")->get();
         $asigns = User::where('company_id', '=', $this->user->company_id)->get();
         $status = Status::where('company_id', '=', $this->user->company_id)->get();
         $activities = Activity::where('company_id', '=', $this->user->company_id)->get();
@@ -438,7 +438,7 @@ public function convertToClient(Request $request){
         $rowId = $activity->contact_id;
         $row = Contact::find($rowId);
         $solved = User::where('company_id', '=', $this->user->company_id)->get();
-        $services1 = Service::where('company_id', '=', $this->user->company_id)->orderBy("text", "asc")->get();
+        $services1 = Service::where('company_id', '=', $this->user->company_id)->where('service_type','=',0)->orderBy("text", "asc")->get();
         $asigns = User::where('company_id', '=', $this->user->company_id)->get();
         $status = Status::where('company_id', '=', $this->user->company_id)->get();
         $activities = Activity::where('company_id', '=', $this->user->company_id)->get();
