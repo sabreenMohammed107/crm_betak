@@ -124,12 +124,12 @@
                 <tbody>
                   @foreach($activities as $index => $activity)
                   <tr>
-                    <td>{{$index+1}}</td>
-                    <td>{{$activity->activity_type}}</td>
+                    <td>{{$activity->activity->name}}</td>
+                    <td>@if($activity->activity_type==2)Todo $else Event @endif</td>
                     <td>@if($activity->activity){{$activity->activity->name}}@endif</td>
                     <td>{{$activity->activity_date}}</td>
                     <td>@if($activity->status){{$activity->status->name}}@endif</td>
-                    <td>{{$activity->ingoing_outgoining_flag}}</td>
+                    <td>{{$activity->notes}}</td>
                     <!-- <td>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Asperiores nobis hic sint necessitatibus autem velit in deserunt est animi. Ipsa earum quos obcaecati exercitationem soluta natus explicabo ducimus illo dolorem.</td> -->
                     <td>
                     <a href="{{ route('edit-lead-activity',$activity->id) }}" class="btn btn-dark d-inline-block">Edit</a>
