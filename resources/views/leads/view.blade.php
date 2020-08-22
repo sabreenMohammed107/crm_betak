@@ -125,7 +125,7 @@
                   @foreach($activities as $index => $activity)
                   <tr>
                     <td>{{$activity->activity->name}}</td>
-                    <td>@if($activity->activity_type==2)Todo $else Event @endif</td>
+                    <td>@if($activity->activity_type==2)Todo @else Event @endif</td>
                     <td>@if($activity->activity){{$activity->activity->name}}@endif</td>
                     <td>{{$activity->activity_date}}</td>
                     <td>@if($activity->status){{$activity->status->name}}@endif</td>
