@@ -181,7 +181,7 @@
                                     <div class="servicesss  col-sm-6 col-md-5  d-flex">
                                     <label for="name">Service 2</label>
                                     <div class="input-group">
-                                    <select  class="form-control " name="service_id[]"  placeholder="@if(!(isset($tags[1])&& $tags['1'] !==null)) @else{{ $tags[1]['text']}} @endif" data-search="true">
+                                    <select  class="form-control " name="service_id[]"   data-search="true">
                                        
                                     @if(!(isset($tags[1])&& $tags['1'] !==null))
                                         <option value=''>select</option>
@@ -209,7 +209,7 @@
                                     <div class="servicesss  col-sm-6 col-md-5  d-flex">
                                     <label for="name">Service 3</label>
                                     <div class="input-group">
-                                    <select  class="form-control" name="service_id[]" width="400" style="" placeholder=" @if(!(isset($tags[2])&& $tags['2'] !==null)) @else{{ $tags[2]['text']}} @endif" data-search="true">
+                                    <select  class="form-control" name="service_id[]" width="400"  data-search="true">
                                         
                                     @if(!(isset($tags[2])&& $tags['2'] !==null))
                                         <option value=''>select</option>
