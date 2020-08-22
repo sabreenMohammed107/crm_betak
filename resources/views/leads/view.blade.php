@@ -116,7 +116,7 @@
                     <th scope="col">Activity Type</th>
                     <th scope="col">Activity Date</th>
                     <th scope="col">Person Status</th>
-                    <th scope="col">Connection Type</th>
+                    <th scope="col">Created By</th>
                     <th scope="col">Note</th>
                     <th></th>
                   </tr>
@@ -126,9 +126,10 @@
                   <tr>
                     <td>{{$activity->activity->name}}</td>
                     <td>@if($activity->activity_type==2)Todo @else Event @endif</td>
-                    <td>@if($activity->activity){{$activity->activity->name}}@endif</td>
                     <td>{{$activity->activity_date}}</td>
                     <td>@if($activity->status){{$activity->status->name}}@endif</td>
+                    <td>@if($row->createdBy){{$row->createdBy->name}} {{$row->createdBy->full_name}}@endif</td>
+
                     <td>{{$activity->notes}}</td>
                     <!-- <td>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Asperiores nobis hic sint necessitatibus autem velit in deserunt est animi. Ipsa earum quos obcaecati exercitationem soluta natus explicabo ducimus illo dolorem.</td> -->
                     <td>
