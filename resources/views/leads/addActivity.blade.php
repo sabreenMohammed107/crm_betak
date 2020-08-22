@@ -110,7 +110,7 @@
                                 {{ csrf_field() }}
                                 <input type="hidden" name="contact_type" value="0">
                                 <input type="hidden" name="contact_id" value="{{$row->id}}">
-                                <h1 style="background-color: #CCC;">First</h1>
+                                <h1 style="background-color: #CCC;">Activity data</h1>
                                 <div class="row justify-content-between Services_Container">
 
 
@@ -241,7 +241,7 @@
                                     </div>
                                 </div>
                                 <hr>
-                                <h1 style="background-color: #CCC;">Second</h1>
+                                <h1 style="background-color: #CCC;">Todo data</h1>
                                 <div class="row justify-content-between Services_Container">
                                     <div class="  col-sm-6 col-md-5  d-flex">
                                         <label for="name"> todo status</label>
@@ -289,7 +289,7 @@
                                     </div>
                                 </div>
                                 <hr>
-                                <h1 style="background-color: #CCC;">Third</h1>
+                                <h1 style="background-color: #CCC;">Activity notes</h1>
                                 <div class="row justify-content-between Services_Container">
                                     <div class="  col-sm-6 col-md-5  d-flex">
                                         <label for="name"> created by</label>
