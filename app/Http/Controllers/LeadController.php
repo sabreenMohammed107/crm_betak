@@ -61,7 +61,7 @@ class LeadController extends Controller
     }])->where('contact_type', '=', 0)
     ->where('company_id', '=', $this->user->company_id)
     ->get();
-    
+
        $xx =$this->object::with('activity')
            ->join('contact_activities','contacts.id', '=', 'contact_activities.contact_id')
              ->whereIn('contact_activities.todo_status_id' ,[1,3,4])
@@ -187,7 +187,6 @@ class LeadController extends Controller
     {
         $row = $this->object::where('id','=',$id)->first();
         // $rows = $this->object::where('contact_type', '=', 1)->orderBy("created_at", "Desc")->get();
-dd($row);
         $titles = Title::where('company_id', '=', $this->user->company_id)->get();
         $countries = Country::where('company_id', '=', $this->user->company_id)->get();
         $cities = City::where('company_id', '=', $this->user->company_id)->get();
