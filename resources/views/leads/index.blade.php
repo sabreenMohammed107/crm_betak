@@ -49,6 +49,7 @@
                         </thead>
                         <tbody>
                             @foreach($rows as $index => $row)
+                           
                             <tr>
                                 <td>{{$index+1}}</td>
                                 {{--<th scope="row"><img src="@if($row->image){{ asset('uploads/')}}/{{ $row->image }} @else {{ asset('assets/img/default-user.gif')}} @endif" alt=""></th>--}}
@@ -82,6 +83,7 @@
                                 </form>
                                 </td>
                             </tr>
+                          
                             @endforeach
                         </tbody>
                     </table>

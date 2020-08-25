@@ -53,7 +53,9 @@ class LeadController extends Controller
      */
     public function index()
     {
-        $rows = $this->object::where('contact_type', '=', 0)->orderBy("created_at", "Desc")->where('company_id', '=', $this->user->company_id)->get();
+        
+        $rows = $this->object::with('activity')->where('contact_type', '=', 0)->orderBy("created_at", "Desc")->where('company_id', '=', $this->user->company_id)->get();
+        $rows=$rows->whereIn("activity.id", [1,3,4]);
 
         $titles = Title::where('company_id', '=', $this->user->company_id)->get();
         $countries = Country::where('company_id', '=', $this->user->company_id)->get();
