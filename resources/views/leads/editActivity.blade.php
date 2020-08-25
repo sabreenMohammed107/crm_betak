@@ -263,7 +263,7 @@
                                     <label for="name">Assigned to</label>
                                     <div class="input-group">
                                         <select name="assigned_to" id="" class="form-control">
-                                        <option value="" disabled> @if($activity->assign){{ $activity->assign->name }}@endif </option>
+                                        <option value="" > @if($activity->assign){{ $activity->assign->name }}@endif </option>
                                             @foreach ($asigns as $data)
                                             <option value='{{$data->id}}' >
                                                 {{ $data->name }}</option>
@@ -286,7 +286,7 @@
                                     <label for="name"> todo solved by</label>
                                     <div class="input-group">
                                         <select name="todo_solved_by" id="" class="form-control">
-                                        <option value="" disabled> @if($activity->solved){{$activity->solved->name }}@endif </option>
+                                        <option value="" > @if($activity->solved){{$activity->solved->name }}@endif </option>
                                             @foreach ($solved as $data)
                                             <option value='{{$data->id}}' >
                                                 {{ $data->name }}</option>
