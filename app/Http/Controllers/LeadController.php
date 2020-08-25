@@ -55,7 +55,7 @@ class LeadController extends Controller
     {
         
         $rows = $this->object::with('activity')->where('contact_type', '=', 0)->orderBy("created_at", "Desc")->where('company_id', '=', $this->user->company_id)->get();
-        $rows=$rows->whereIn("activity.todo_status_id", [1,3,4])->get();
+        $rows=$rows->whereIn("activity.todo_status_id", [1,3,4])->toArray();
 
         $titles = Title::where('company_id', '=', $this->user->company_id)->get();
         $countries = Country::where('company_id', '=', $this->user->company_id)->get();
