@@ -263,12 +263,12 @@
                                     <label for="name">Assigned to</label>
                                     <div class="input-group">
                                         <select name="assigned_to" id="" class="form-control">
-                                      
+                                        <option value="" {{ $data->id == $activity->assigned_to ? 'selected' : '' }}> </option>
                                             @foreach ($asigns as $data)
-                                            <option value='{{$data->id}}' {{ $data->id == $activity->assigned_to ? 'selected' : '' }}>
+                                            <option value='{{$data->id}}' >
                                                 {{ $data->name }}</option>
                                             @endforeach
-                                            <option value=""> </option>
+                                          
                                         </select>
                                     </div>
                                 </div>
@@ -286,12 +286,12 @@
                                     <label for="name"> todo solved by</label>
                                     <div class="input-group">
                                         <select name="todo_solved_by" id="" class="form-control">
-                                     
+                                        <option value="" {{ $data->id == $activity->todo_solved_by ? 'selected' : '' }}> </option>
                                             @foreach ($solved as $data)
-                                            <option value='{{$data->id}}' {{ $data->id == $activity->todo_solved_by ? 'selected' : '' }}>
+                                            <option value='{{$data->id}}' >
                                                 {{ $data->name }}</option>
                                             @endforeach
-                                            <option value=""> </option>
+                                          
                                         </select>
                                     </div>
                                 </div>
