@@ -57,5 +57,5 @@ class Contact extends Model
     {
         return $this->hasMany('App\Contact_activity','contact_id','id');
     }
-   
+    
 }

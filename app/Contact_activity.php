@@ -16,7 +16,10 @@ class Contact_activity extends Model
         return $this->belongsToMany(Service::class, 'activity_services', 'activity_id','service_id');
       
     }
-
+    public function todo()
+    {
+        return $this->belongsTo('App\todo_status','todo_status_id');
+    }
 
     
     public function contact()
