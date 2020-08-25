@@ -263,7 +263,7 @@
                                     <label for="name">Assigned to</label>
                                     <div class="input-group">
                                         <select name="assigned_to" id="" class="form-control">
-                                        <option value=""> {{  $activity->assign->name ??  '' }} </option>
+                                        <option value=""> {{ $activity->assign->name ??  'select' }} </option>
                                             @foreach ($asigns as $data)
                                             <option value='{{$data->id}}' >
                                                 {{ $data->name }}</option>
