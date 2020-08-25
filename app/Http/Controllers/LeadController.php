@@ -59,8 +59,7 @@ class LeadController extends Controller
      
        $rows =$this->object::with('activity')
            ->join('contact_activities','contacts.id', '=', 'contact_activities.contact_id')
-      
-       ->whereIn('contact_activities.todo_status_id' ,[1,3,4])
+             ->whereIn('contact_activities.todo_status_id' ,[1,3,4])
        ->where('contact_type', '=', 0)
        ->where('company_id', '=', $this->user->company_id)
        ->get();
@@ -180,7 +179,7 @@ class LeadController extends Controller
      */
     public function show($id)
     {
-        $row = Contact::find($id);
+        $row = Contact::where('id',$id)->first();
         // $rows = $this->object::where('contact_type', '=', 1)->orderBy("created_at", "Desc")->get();
 
         $titles = Title::where('company_id', '=', $this->user->company_id)->get();
@@ -209,7 +208,7 @@ public function convertToClient(Request $request){
      */
     public function edit($id)
     {
-        $row = Contact::find($id);
+        $row = Contact::where('id',$id)->first();
         // $rows = $this->object::where('contact_type', '=', 1)->orderBy("created_at", "Desc")->get();
 
         $titles = Title::where('company_id', '=', $this->user->company_id)->get();
