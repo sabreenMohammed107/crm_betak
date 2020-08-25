@@ -179,7 +179,7 @@ class LeadController extends Controller
      */
     public function show($id)
     {
-        $row = Contact::where('id',$id)->first();
+        $row = $this->object::with('activity')->where('id',$id)->first();
         // $rows = $this->object::where('contact_type', '=', 1)->orderBy("created_at", "Desc")->get();
 
         $titles = Title::where('company_id', '=', $this->user->company_id)->get();
@@ -208,7 +208,7 @@ public function convertToClient(Request $request){
      */
     public function edit($id)
     {
-        $row = Contact::where('id',$id)->first();
+        $row = $this->object::with('activity')->where('id',$id)->first();
         // $rows = $this->object::where('contact_type', '=', 1)->orderBy("created_at", "Desc")->get();
 
         $titles = Title::where('company_id', '=', $this->user->company_id)->get();
