@@ -22,6 +22,7 @@ use DB;
 use Log;
 use Carbon\Carbon;
 use Illuminate\Database\QueryException;
+
 class LeadController extends Controller
 {
     protected $object;
@@ -36,12 +37,13 @@ class LeadController extends Controller
      */
     public function __construct(Contact $object)
     {
-        $this->middleware('auth'); 
+        $this->middleware('auth');
         //get user
-       $this->middleware(function ($request, $next) {
-           $this->user = auth()->user();
-           return $next($request);
-       });        $this->object = $object;
+        $this->middleware(function ($request, $next) {
+            $this->user = auth()->user();
+            return $next($request);
+        });
+        $this->object = $object;
         $this->viewName = 'leads.';
         $this->routeName = 'lead.';
         $this->message = 'The Data has been saved';
@@ -53,22 +55,21 @@ class LeadController extends Controller
      */
     public function index()
     {
-        
+
         // $rows = $this->object::with('activity')->where('contact_type', '=', 0)->orderBy("created_at", "Desc")->where('company_id', '=', $this->user->company_id)->get();
         // $rows=$rows->whereIn("activity.todo_status_id", [1,3,4])->get()->toArray();
-     $rows=$this->object::with(['activity' => function ($q) {
-        $q->whereIn('todo_status_id' ,[1,3,4]);
-    }])->where('contact_type', '=', 0)
-    ->where('company_id', '=', $this->user->company_id)
-    ->get();
+        $rows = $this->object::whereHas('activity', function ($query) {
+            $query->whereIn('todo_status_id', [1,3,4]);
+        })->where('contact_type', '=', 0)
+            ->where('company_id', '=', $this->user->company_id)
+            ->get();
+        $xx = $this->object::with('activity')
+            ->join('contact_activities', 'contacts.id', '=', 'contact_activities.contact_id')
+            ->whereIn('contact_activities.todo_status_id', [1, 3, 4])
+            ->where('contact_type', '=', 0)
+            ->where('company_id', '=', $this->user->company_id)
+            ->get();
 
-       $xx =$this->object::with('activity')
-           ->join('contact_activities','contacts.id', '=', 'contact_activities.contact_id')
-             ->whereIn('contact_activities.todo_status_id' ,[1,3,4])
-       ->where('contact_type', '=', 0)
-       ->where('company_id', '=', $this->user->company_id)
-       ->get();
-     
         $titles = Title::where('company_id', '=', $this->user->company_id)->get();
         $countries = Country::where('company_id', '=', $this->user->company_id)->get();
         $cities = City::where('company_id', '=', $this->user->company_id)->get();
@@ -102,7 +103,7 @@ class LeadController extends Controller
      */
     public function store(Request $request)
     {
-        
+
         $data = [
             'name' => $request->input('name'),
             'whatsapp' => $request->input('whatsapp'),
@@ -114,13 +115,13 @@ class LeadController extends Controller
             'fb_account' => $request->input('fb_account'),
             'address' => $request->input('address'),
             'website' => $request->input('website'),
-            'birthdate' =>Carbon::parse($request->input('birthdate')),
+            'birthdate' => Carbon::parse($request->input('birthdate')),
             'job' => $request->input('job'),
             'company' => $request->input('company'),
             'contact_type' => $request->input('contact_type'),
             'identity' => $request->input('identity'),
             'created_by_user' => $request->input('created_by_user'),
-            'education'=>$request->input('education')
+            'education' => $request->input('education')
 
         ];
 
@@ -185,7 +186,7 @@ class LeadController extends Controller
      */
     public function show($id)
     {
-        $row = $this->object::where('id','=',$id)->first();
+        $row = $this->object::where('id', '=', $id)->first();
         // $rows = $this->object::where('contact_type', '=', 1)->orderBy("created_at", "Desc")->get();
         $titles = Title::where('company_id', '=', $this->user->company_id)->get();
         $countries = Country::where('company_id', '=', $this->user->company_id)->get();
@@ -194,17 +195,18 @@ class LeadController extends Controller
         $users = User::where('company_id', '=', $this->user->company_id)->get();
         $reachs = Reach_Source::where('company_id', '=', $this->user->company_id)->get();
         $activities = Contact_activity::where('contact_id', '=', $id)->orderBy("created_at", "Desc")->get();
-        return view($this->viewName . 'view', compact('row', 'titles','activities', 'countries', 'cities', 'nationalities', 'users', 'reachs'));
+        return view($this->viewName . 'view', compact('row', 'titles', 'activities', 'countries', 'cities', 'nationalities', 'users', 'reachs'));
     }
-public function convertToClient(Request $request){
-    $id= $request->input('coverter');
-    $data = [
-        'contact_type' =>1,
-    ];
-    $this->object::findOrFail($id)->update($data);
+    public function convertToClient(Request $request)
+    {
+        $id = $request->input('coverter');
+        $data = [
+            'contact_type' => 1,
+        ];
+        $this->object::findOrFail($id)->update($data);
 
-    return redirect()->route($this->routeName.'index')->with('flash_success', $this->message);
-}
+        return redirect()->route($this->routeName . 'index')->with('flash_success', $this->message);
+    }
     /**
      * Show the form for editing the specified resource.
      *
@@ -213,7 +215,7 @@ public function convertToClient(Request $request){
      */
     public function edit($id)
     {
-        $row = $this->object::with('activity')->where('id',$id)->first();
+        $row = $this->object::with('activity')->where('id', $id)->first();
         // $rows = $this->object::where('contact_type', '=', 1)->orderBy("created_at", "Desc")->get();
 
         $titles = Title::where('company_id', '=', $this->user->company_id)->get();
@@ -234,7 +236,7 @@ public function convertToClient(Request $request){
      */
     public function update(Request $request, $id)
     {
-       
+
         $data = [
             'name' => $request->input('name'),
             'whatsapp' => $request->input('whatsapp'),
@@ -246,7 +248,7 @@ public function convertToClient(Request $request){
             'fb_account' => $request->input('fb_account'),
             'address' => $request->input('address'),
             'website' => $request->input('website'),
-            'birthdate' =>Carbon::parse($request->input('birthdate')),
+            'birthdate' => Carbon::parse($request->input('birthdate')),
             'job' => $request->input('job'),
             'company' => $request->input('company'),
             'contact_type' => $request->input('contact_type'),
@@ -302,7 +304,7 @@ public function convertToClient(Request $request){
         $data['company_id'] = $this->user->company_id;
         $this->object::findOrFail($id)->update($data);
 
-        return redirect()->route($this->routeName.'index')->with('flash_success', $this->message);
+        return redirect()->route($this->routeName . 'index')->with('flash_success', $this->message);
     }
 
     /**
@@ -350,7 +352,7 @@ public function convertToClient(Request $request){
 
         return $imageName;
     }
- /**
+    /**
      * 
      * Activity
      */
@@ -359,13 +361,13 @@ public function convertToClient(Request $request){
     {
         $row = Contact::find($id);
         $solved = User::where('company_id', '=', $this->user->company_id)->get();
-        $services1 = Service::where('company_id', '=', $this->user->company_id)->where('service_type','=',0)->orderBy("text", "asc")->get();
+        $services1 = Service::where('company_id', '=', $this->user->company_id)->where('service_type', '=', 0)->orderBy("text", "asc")->get();
         $asigns = User::where('company_id', '=', $this->user->company_id)->get();
         $status = Status::where('company_id', '=', $this->user->company_id)->get();
         $activities = Activity::where('company_id', '=', $this->user->company_id)->get();
-        $sourses=Activity_source::where('company_id', '=', $this->user->company_id)->get();
-        $todoStatus=todo_status::where('company_id', '=', $this->user->company_id)->get();
-        return view($this->viewName . 'addActivity', compact('row','sourses', 'activities','todoStatus', 'status', 'asigns', 'services1', 'solved'));
+        $sourses = Activity_source::where('company_id', '=', $this->user->company_id)->get();
+        $todoStatus = todo_status::where('company_id', '=', $this->user->company_id)->get();
+        return view($this->viewName . 'addActivity', compact('row', 'sourses', 'activities', 'todoStatus', 'status', 'asigns', 'services1', 'solved'));
     }
     public function saveActivity(Request $request)
     {
@@ -411,14 +413,14 @@ public function convertToClient(Request $request){
             $data['todo_status_id'] = $request->input('todo_status_id');
         }
         $all_services = [];
-        
+
 
         foreach ($request->input('service_id') as $image) {
 
             $data['service_id'] = $image;
-            $all_services[] =$image;
+            $all_services[] = $image;
         }
-       
+
         //passing parameter to transaction
         DB::transaction(function () use ($data, $all_services) {
             $Contact_activity = Contact_activity::create($data);
@@ -433,7 +435,7 @@ public function convertToClient(Request $request){
 
 
 
-         return redirect()->route($this->routeName . 'show', $id)->with('flash_success', $this->message);
+        return redirect()->route($this->routeName . 'show', $id)->with('flash_success', $this->message);
     }
 
     public function dynamicService()
@@ -446,23 +448,23 @@ public function convertToClient(Request $request){
 
         return ($services1);
     }
-   
+
     public function editActivity($id)
     {
         $activity = Contact_activity::find($id);
         $rowId = $activity->contact_id;
         $row = Contact::find($rowId);
         $solved = User::where('company_id', '=', $this->user->company_id)->get();
-        $services1 = Service::where('company_id', '=', $this->user->company_id)->where('service_type','=',0)->orderBy("text", "asc")->get();
+        $services1 = Service::where('company_id', '=', $this->user->company_id)->where('service_type', '=', 0)->orderBy("text", "asc")->get();
         $asigns = User::where('company_id', '=', $this->user->company_id)->get();
         $status = Status::where('company_id', '=', $this->user->company_id)->get();
         $activities = Activity::where('company_id', '=', $this->user->company_id)->get();
         $sourses = Activity_source::where('company_id', '=', $this->user->company_id)->get();
         $services = Activity_service::where('activity_id', '=', $id)->orderBy("created_at", "Desc")->get();
-        $todoStatus=todo_status::where('company_id', '=', $this->user->company_id)->get();
+        $todoStatus = todo_status::where('company_id', '=', $this->user->company_id)->get();
         $tags = $activity->service;
         // dd($tags[0]['text']);
-        return view($this->viewName . 'editActivity', compact('activity','tags', 'row','todoStatus', 'sourses', 'activities', 'status', 'asigns', 'services1', 'solved'));
+        return view($this->viewName . 'editActivity', compact('activity', 'tags', 'row', 'todoStatus', 'sourses', 'activities', 'status', 'asigns', 'services1', 'solved'));
     }
     public function deleteActivity($id)
     {
@@ -543,7 +545,7 @@ public function convertToClient(Request $request){
         }
 
         //passing parameter to transaction
-    
+
         DB::transaction(function () use ($data, $all_services, $updatedId) {
 
             $activity = Contact_activity::where('id', '=', $updatedId)->first();
@@ -553,5 +555,4 @@ public function convertToClient(Request $request){
 
         return redirect()->route($this->routeName . 'show', $id)->with('flash_success', $this->message);
     }
-    }
-
+}
