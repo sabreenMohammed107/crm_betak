@@ -53,10 +53,7 @@ class LeadController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function latestStatus()
-    {
-        return $this->hasOne(Contact_activity::class)->latest();
-    }
+    
     public function index()
     {
 

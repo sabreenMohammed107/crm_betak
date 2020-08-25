@@ -15,7 +15,10 @@ class Contact extends Model
         'job', 'company', 'contact_type', 'assigned_to', 'reach_source_id', 'image','customer_type', 'identity',
         'identity_path', 'status_id','created_by_user','education'
     ];
-    
+    public function latestStatus()
+    {
+        return $this->hasOne(Contact_activity::class)->latest();
+    }
     public function title()
     {
         return $this->belongsTo('App\Title','title_id');
