@@ -33,11 +33,11 @@ class Contact_activity extends Model
     }
     public function assign()
     {
-        return $this->belongsTo('App\Country','assigned_to');
+        return $this->belongsTo('App\User','assigned_to');
     }
     public function solved()
     {
-        return $this->belongsTo('App\Country','todo_solved_by');
+        return $this->belongsTo('App\User','todo_solved_by');
     }
     public function source()
     {
