@@ -268,7 +268,7 @@
                                             <option value='{{$data->id}}' >
                                                 {{ $data->name }}</option>
                                             @endforeach
-                                            <option value="" > select </option>
+                                          
                                         </select>
                                     </div>
                                 </div>
@@ -291,7 +291,7 @@
                                             <option value='{{$data->id}}' >
                                                 {{ $data->name }}</option>
                                             @endforeach
-                                            <option value="" > select </option>
+                                         
                                         </select>
                                     </div>
                                 </div>
