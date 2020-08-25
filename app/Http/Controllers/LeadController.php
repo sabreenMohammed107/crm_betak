@@ -61,6 +61,8 @@ class LeadController extends Controller
        ->join('contact_activities','contacts.id', '=', 'contact_activities.id')
        ->select('*')
        ->whereIn('contact_activities.todo_status_id' ,[1,3,4])
+       ->where('contact_type', '=', 0)
+       ->where('company_id', '=', $this->user->company_id)
        ->get();
         $titles = Title::where('company_id', '=', $this->user->company_id)->get();
         $countries = Country::where('company_id', '=', $this->user->company_id)->get();
