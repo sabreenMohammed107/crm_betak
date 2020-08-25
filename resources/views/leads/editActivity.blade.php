@@ -263,12 +263,12 @@
                                     <label for="name">Assigned to</label>
                                     <div class="input-group">
                                         <select name="assigned_to" id="" class="form-control">
-                                        <option value=""> {{ $activity->assign->name ??  'select' }} </option>
+                                        <option value="" disabled> {{ $activity->assign->name ??  'select' }} </option>
                                             @foreach ($asigns as $data)
                                             <option value='{{$data->id}}' >
                                                 {{ $data->name }}</option>
                                             @endforeach
-                                          
+                                            <option value="" > select </option>
                                         </select>
                                     </div>
                                 </div>
@@ -286,12 +286,12 @@
                                     <label for="name"> todo solved by</label>
                                     <div class="input-group">
                                         <select name="todo_solved_by" id="" class="form-control">
-                                        <option value=""> {{$activity->solved->name ??  'select' }} </option>
+                                        <option value="" disabled> {{$activity->solved->name ??  'select' }} </option>
                                             @foreach ($solved as $data)
                                             <option value='{{$data->id}}' >
                                                 {{ $data->name }}</option>
                                             @endforeach
-                                          
+                                            <option value="" > select </option>
                                         </select>
                                     </div>
                                 </div>
