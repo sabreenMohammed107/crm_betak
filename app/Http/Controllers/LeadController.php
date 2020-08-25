@@ -57,12 +57,11 @@ class LeadController extends Controller
         // $rows = $this->object::with('activity')->where('contact_type', '=', 0)->join('Contact_activity', 'Contact_activity.todo_status_id', 'IN',[1,3,4])->orderBy("created_at", "Desc")->where('company_id', '=', $this->user->company_id)->get();
         // $rows=$rows->whereIn("activity.todo_status_id", [1,3,4])->get()->toArray();
      
-       $articles =DB::table('contacts')
+       $rows =DB::table('contacts')
        ->join('contact_activities','contacts.id', '=', 'contact_activities.id')
        ->select('*')
        ->whereIn('contact_activities.todo_status_id' ,[1,3,4])
        ->get();
-       dd($articles);
         $titles = Title::where('company_id', '=', $this->user->company_id)->get();
         $countries = Country::where('company_id', '=', $this->user->company_id)->get();
         $cities = City::where('company_id', '=', $this->user->company_id)->get();
