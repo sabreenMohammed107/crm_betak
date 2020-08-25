@@ -60,7 +60,7 @@ class LeadController extends Controller
         // $rows=$rows->whereIn("activity.todo_status_id", [1,3,4])->get()->toArray();
         $rows = $this->object::whereHas('activity', function ($query) {
             $query->whereColumn('contacts.id', 'contact_activities.contact_id');
-            $query->whereIn('todo_status_id', [1,3,4])->orderBy("created_at", "Desc")->take(1);
+            $query->whereIn('todo_status_id', [1,3,4]);
             $query->orderBy("id", "Desc")->limit(1);
         })->orWhereDoesntHave('activity')
         ->where('contact_type', '=', 0)
