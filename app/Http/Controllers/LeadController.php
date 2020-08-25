@@ -179,9 +179,9 @@ class LeadController extends Controller
      */
     public function show($id)
     {
-        $row = $this->object::with('activity')->where('id',$id)->first();
+        $row = $this->object::where('id','=',$id)->first();
         // $rows = $this->object::where('contact_type', '=', 1)->orderBy("created_at", "Desc")->get();
-dd($id);
+dd($row);
         $titles = Title::where('company_id', '=', $this->user->company_id)->get();
         $countries = Country::where('company_id', '=', $this->user->company_id)->get();
         $cities = City::where('company_id', '=', $this->user->company_id)->get();
