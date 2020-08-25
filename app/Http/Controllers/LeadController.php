@@ -16,6 +16,7 @@ use App\Status;
 use App\Activity;
 use App\Service;
 use App\Activity_service;
+use App\todo_status;
 use File;
 use DB;
 use Log;
@@ -350,7 +351,8 @@ public function convertToClient(Request $request){
         $status = Status::where('company_id', '=', $this->user->company_id)->get();
         $activities = Activity::where('company_id', '=', $this->user->company_id)->get();
         $sourses=Activity_source::where('company_id', '=', $this->user->company_id)->get();
-        return view($this->viewName . 'addActivity', compact('row','sourses', 'activities', 'status', 'asigns', 'services1', 'solved'));
+        $todoStatus=todo_status::where('company_id', '=', $this->user->company_id)->get();
+        return view($this->viewName . 'addActivity', compact('row','sourses', 'activities','todoStatus', 'status', 'asigns', 'services1', 'solved'));
     }
     public function saveActivity(Request $request)
     {
@@ -444,10 +446,10 @@ public function convertToClient(Request $request){
         $activities = Activity::where('company_id', '=', $this->user->company_id)->get();
         $sourses = Activity_source::where('company_id', '=', $this->user->company_id)->get();
         $services = Activity_service::where('activity_id', '=', $id)->orderBy("created_at", "Desc")->get();
-        
+        $todoStatus=todo_status::where('company_id', '=', $this->user->company_id)->get();
         $tags = $activity->service;
         // dd($tags[0]['text']);
-        return view($this->viewName . 'editActivity', compact('activity','tags', 'row', 'sourses', 'activities', 'status', 'asigns', 'services1', 'solved'));
+        return view($this->viewName . 'editActivity', compact('activity','tags', 'row','todoStatus', 'sourses', 'activities', 'status', 'asigns', 'services1', 'solved'));
     }
     public function deleteActivity($id)
     {

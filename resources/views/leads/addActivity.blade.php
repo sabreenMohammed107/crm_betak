@@ -249,8 +249,11 @@
                                         <label for="name"> todo status</label>
                                         <div class="input-group">
                                             <select name="todo_status_id" id="" class="form-control">
-                                                <option value="1">in progress </option>
-                                                <option value="2">completed</option>
+                                            @foreach ($todoStatus as $data)
+                                            <option value='{{$data->id}}'>
+                                                    {{ $data->todo_status }}</option>
+                                                @endforeach
+                                                
                                             </select>
                                         </div>
                                     </div>
