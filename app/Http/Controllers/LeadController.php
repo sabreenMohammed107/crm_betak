@@ -53,19 +53,13 @@ class LeadController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-   
     public function index()
     {
 
         // $rows = $this->object::with('activity')->where('contact_type', '=', 0)->orderBy("created_at", "Desc")->where('company_id', '=', $this->user->company_id)->get();
         // $rows=$rows->whereIn("activity.todo_status_id", [1,3,4])->get()->toArray();
-        $rows = $this->object::whereHas('activity' , function($query) {
-            $query->select('*')
-                ->from('contact_activities')
-                ->whereColumn('contact_id', 'contacts.id')
-                ->whereIn('todo_status_id', [1,3,4])
-                ->latest()
-                ->limit(1);
+        $rows = $this->object::whereHas('activity', function ($query) {
+            $query->whereIn('todo_status_id', [1,3,4]);
         })->orWhereDoesntHave('activity')
         ->where('contact_type', '=', 0)
             ->where('company_id', '=', $this->user->company_id)
@@ -73,9 +67,9 @@ class LeadController extends Controller
             ->get();
 
 
+
+
 dd($rows);
-
-
 
 
 
