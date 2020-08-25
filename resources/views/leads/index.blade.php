@@ -70,13 +70,13 @@
                                 </td>
 
                                 <td>
-                                <a href="{{ route('lead.show',$row->id) }}" style="padding: 5px;background:light"><i class="fa fa-file" aria-hidden="true"></i> </a>
+                                <a href="{{ route('lead.show',$row->contact_id) }}" style="padding: 5px;background:light"><i class="fa fa-file" aria-hidden="true"></i> </a>
 
-                                    <a href="{{ route('lead.edit',$row->id) }}"  style="padding: 5px;background:light"><i class="fas fa-pencil-alt " ></i></a>
+                                    <a href="{{ route('lead.edit',$row->contact_id) }}"  style="padding: 5px;background:light"><i class="fas fa-pencil-alt " ></i></a>
 
-                                <a href="#" onclick="destroy('this Lead', '{{$row->id}}')" style="padding: 5px;background:light"><i class="far fa-trash-alt"></i> </a>
+                                <a href="#" onclick="destroy('this Lead', '{{$row->contact_id}}')" style="padding: 5px;background:light"><i class="far fa-trash-alt"></i> </a>
 
-                                <form id="delete_{{$row->id}}" action="{{ route('lead.destroy', $row->id) }}" method="POST" style="display: none;">
+                                <form id="delete_{{$row->id}}" action="{{ route('lead.destroy', $row->contact_id) }}" method="POST" style="display: none;">
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit" value=""></button>
