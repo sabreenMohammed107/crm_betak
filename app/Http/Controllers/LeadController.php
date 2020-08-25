@@ -73,7 +73,7 @@ class LeadController extends Controller
             ->get();
 
 
-
+dd($rows);
 
 
 
