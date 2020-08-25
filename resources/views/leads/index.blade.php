@@ -41,7 +41,7 @@
                                 <th scope="col">Last Activity Date </th>
                                 <th scope="col">Last Activity Notes </th>
                                 <th scope="col">Created By</th>
-                                <!-- <th scope="col">Main Service</th> -->
+                                <!-- <th scope="col">Todo Status</th> -->
                                 <!-- <th scope="col">Created By</th> -->
 
                                 <th></th>
