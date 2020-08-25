@@ -263,7 +263,7 @@
                                     <label for="name">Assigned to</label>
                                     <div class="input-group">
                                         <select name="assigned_to" id="" class="form-control">
-                                        <option value="" {{ $data->id == $activity->assigned_to ? 'selected' : '' }}> </option>
+                                        <option value=""> {{  $activity->assign->name ??  '' }} </option>
                                             @foreach ($asigns as $data)
                                             <option value='{{$data->id}}' >
                                                 {{ $data->name }}</option>
@@ -286,7 +286,7 @@
                                     <label for="name"> todo solved by</label>
                                     <div class="input-group">
                                         <select name="todo_solved_by" id="" class="form-control">
-                                        <option value="" {{ $data->id == $activity->todo_solved_by ? 'selected' : '' }}> </option>
+                                        <option value=""> {{  $activity->solved->name ??  '' }} </option>
                                             @foreach ($solved as $data)
                                             <option value='{{$data->id}}' >
                                                 {{ $data->name }}</option>
