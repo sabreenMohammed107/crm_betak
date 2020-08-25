@@ -61,7 +61,10 @@ class LeadController extends Controller
         $rows = $this->object::whereHas('activity', function ($query) {
             $query->whereIn('todo_status_id', [1,3,4])
             ->where('id', function ($query) {
-                $query->orderByDesc('id')
+                $query->select('id')
+                    ->from('contact_activities as latest')
+                    ->whereColumn('latest.id', 'contact_activities.id')
+                    ->orderByDesc('id')
                     ->limit(1);
             });
         })->orWhereDoesntHave('activity')
