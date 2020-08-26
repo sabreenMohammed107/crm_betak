@@ -68,7 +68,8 @@ class LeadController extends Controller
             ->where('company_id', '=', $this->user->company_id)
             ->orderBy("created_at", "Desc")
             ->with(['latestLog' => function ($q) {
-                $q->where('todo_status_id','=', 1)->ORWERE('todo_status_id','=', 3)->ORWHERE('todo_status_id','=', 4);
+                $q->where('todo_status_id','=', 1);
+              
                     }])->orWhereDoesntHave('latestLog')->get();
        
        
