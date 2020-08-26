@@ -81,7 +81,7 @@ class LeadController extends Controller
 
        }
        
-      return($rows);
+     
         $titles = Title::where('company_id', '=', $this->user->company_id)->get();
         $countries = Country::where('company_id', '=', $this->user->company_id)->get();
         $cities = City::where('company_id', '=', $this->user->company_id)->get();
