@@ -214,7 +214,7 @@ function getAll(){
             action1: value  
         },
         success: function (response) {
-          
+        
             $('#preTable').html(response);
         },
         

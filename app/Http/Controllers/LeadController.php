@@ -90,7 +90,7 @@ class LeadController extends Controller
         ->orderBy("created_at", "Desc")
         ->with('latestLog')->orWhereDoesntHave('latestLog')->get();
        
-        if($all===0){
+        if($all==0){
             foreach ($xx as $row) {
                 if (isset($row->latestLog['todo_status_id'])) {
                     if ($row->latestLog['todo_status_id'] == 1 || $row->latestLog['todo_status_id'] == 3 || $row->latestLog['todo_status_id'] == 4) {
