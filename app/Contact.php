@@ -55,7 +55,7 @@ class Contact extends Model
     }
     public function activity()
     {
-        return $this->hasMany('App\Contact_activity','contact_id','id');
+        return $this->hasMany('App\Contact_activity','contact_id','id')->latest();
     }
     
 }
