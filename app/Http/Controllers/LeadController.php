@@ -56,18 +56,19 @@ class LeadController extends Controller
     public function index()
     {
 
-      
-        $rows = $this->object:: whereHas('activity' ,function($q) {
-               
-                    $q->whereIn('todo_status_id', [1,3,4]);
-              
-    })->orWhereDoesntHave('activity')
-        ->with('activity')->where('contact_type', '=', 0)
+
+        $rows = $this->object::whereHas('latestLog', function ($q) {
+
+            $q->whereIn('todo_status_id', [1, 3, 4]);
+           
+
+        })->orWhereDoesntHave('latestLog')
+            ->with('latestLog')->where('contact_type', '=', 0)
             ->where('company_id', '=', $this->user->company_id)
             ->orderBy("created_at", "Desc")
             ->get();
-      
-            return($rows);
+       
+       
         $titles = Title::where('company_id', '=', $this->user->company_id)->get();
         $countries = Country::where('company_id', '=', $this->user->company_id)->get();
         $cities = City::where('company_id', '=', $this->user->company_id)->get();
