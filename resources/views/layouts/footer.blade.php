@@ -33,23 +33,10 @@
   <script src="{{ asset('assets/js/settings.js')}}"></script>
   <!-- Latest compiled and minified JavaScript -->
   <script src="{{ asset('assets/js/selectstyle.js')}}"></script>
-<script>
-jQuery(document).ready(function($) {
-	$('.selectxx').selectstyle({
-		width  : 400,
-		height : 300,
-    theme  : 'light',
-    placeholder: {
-    id: '-1', // the value of the option
-    text: 'Select an option'
-  },
-		onchange : function(val){}
-	});
-});
-</script>
-  <script>
+
+
     @yield('script')
-  </script>
+ 
 
 
 </body>

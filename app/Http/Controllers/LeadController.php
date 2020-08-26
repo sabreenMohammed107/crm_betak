@@ -55,33 +55,23 @@ class LeadController extends Controller
      */
     public function index()
     {
-
-
-        // $rows = $this->object::where('contact_type', '=', 0)
-        //     ->where('company_id', '=', $this->user->company_id)
-        //     ->orderBy("created_at", "Desc")
-        //     ->with(['latestLog' => function ($q) {
-        //         $q->whereIn('todo_status_id', [1, 3, 4]);
-        //             }])->orWhereDoesntHave('latestLog')->get();
-       $rows=array();
-         $xx = $this->object::where('contact_type', '=', 0)
+        $rows = array();
+        $xx = $this->object::where('contact_type', '=', 0)
             ->where('company_id', '=', $this->user->company_id)
             ->orderBy("created_at", "Desc")
             ->with('latestLog')->orWhereDoesntHave('latestLog')->get();
-       foreach($xx as $row){
-           if(isset($row->latestLog['todo_status_id'] )){
-            if($row->latestLog['todo_status_id'] ==1 || $row->latestLog['todo_status_id']==3 ||$row->latestLog['todo_status_id']==4){
-  
+        foreach ($xx as $row) {
+            if (isset($row->latestLog['todo_status_id'])) {
+                if ($row->latestLog['todo_status_id'] == 1 || $row->latestLog['todo_status_id'] == 3 || $row->latestLog['todo_status_id'] == 4) {
+
+                    array_push($rows, $row);
+                }
+            } else {
                 array_push($rows, $row);
             }
-           }
-           else{
-            array_push($rows, $row);
-           }
+        }
 
-       }
-       
-     
+
         $titles = Title::where('company_id', '=', $this->user->company_id)->get();
         $countries = Country::where('company_id', '=', $this->user->company_id)->get();
         $cities = City::where('company_id', '=', $this->user->company_id)->get();
@@ -91,6 +81,38 @@ class LeadController extends Controller
         return view($this->viewName . 'index', compact('rows', 'titles', 'countries', 'cities', 'nationalities', 'users', 'reachs'));
     }
 
+    public function fetch_allLead(Request $request)
+    {
+        $all = $request->input('action1');
+        $rows = array();
+        $xx = $this->object::where('contact_type', '=', 0)
+        ->where('company_id', '=', $this->user->company_id)
+        ->orderBy("created_at", "Desc")
+        ->with('latestLog')->orWhereDoesntHave('latestLog')->get();
+       
+        if($all===0){
+            foreach ($xx as $row) {
+                if (isset($row->latestLog['todo_status_id'])) {
+                    if ($row->latestLog['todo_status_id'] == 1 || $row->latestLog['todo_status_id'] == 3 || $row->latestLog['todo_status_id'] == 4) {
+    
+                        array_push($rows, $row);
+                    }
+                } else {
+                    array_push($rows, $row);
+                }
+            }
+        }else{
+            foreach ($xx as $row) {
+                
+                    array_push($rows, $row);
+                
+            }
+        }
+    
+    //    dd($rows);
+       
+        return view($this->viewName . 'preIndex', compact('rows'))->render();
+    }
     /**
      * Show the form for creating a new resource.
      *

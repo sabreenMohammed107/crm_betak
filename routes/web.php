@@ -51,6 +51,8 @@ Route::post('convert-to-client', 'LeadController@convertToClient')->name('conver
 Route::delete('delete-lead-activity/{id}', 'LeadController@deleteActivity')->name('delete-lead-activity');
 Route::get('edit-lead-activity/{id}', 'LeadController@editActivity')->name('edit-lead-activity');
 Route::post('update-lead-activity', 'LeadController@updateActivity')->name('update-lead-activity');
+Route::get('fetch_allLead', 'LeadController@fetch_allLead')->name('fetch_allLead');
+
 /*--------------------fqa-----------------------*/
 Route::resource('fqa', 'FqaController');
 
