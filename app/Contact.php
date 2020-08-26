@@ -63,7 +63,7 @@ class Contact extends Model
     }
     public function latestLog()
 {
-return $this->hasOne('App\Contact_activity')->whereIn('todo_status_id', [1, 3, 4])->latest();
+return $this->hasOne('App\Contact_activity')->latest();
 }
    
 }

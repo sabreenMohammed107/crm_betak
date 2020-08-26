@@ -59,9 +59,10 @@ class LeadController extends Controller
 
         $rows = $this->object::with('latestLog')->where('contact_type', '=', 0)
             ->where('company_id', '=', $this->user->company_id)
-            ->orWhereDoesntHave('latestLog')
             ->orderBy("created_at", "Desc")
-            ->get();
+            ->whereHas('latestLog',function ($q) {
+                $q->whereIn('todo_status_id', [1, 3, 4]);
+                    })->orWhereDoesntHave('latestLog')->get();
        
        
       return($rows);
