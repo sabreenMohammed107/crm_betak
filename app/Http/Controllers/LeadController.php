@@ -63,12 +63,23 @@ class LeadController extends Controller
         //     ->with(['latestLog' => function ($q) {
         //         $q->whereIn('todo_status_id', [1, 3, 4]);
         //             }])->orWhereDoesntHave('latestLog')->get();
-       
-         $rows = $this->object::where('contact_type', '=', 0)
+       $rows=array();
+         $xx = $this->object::where('contact_type', '=', 0)
             ->where('company_id', '=', $this->user->company_id)
             ->orderBy("created_at", "Desc")
             ->with('latestLog')->orWhereDoesntHave('latestLog')->get();
-       
+       foreach($xx as $row){
+           if(isset($row->latestLog['todo_status_id'] )){
+            if($row->latestLog['todo_status_id'] ==1 || $row->latestLog['todo_status_id']==3 ||$row->latestLog['todo_status_id']==4){
+  
+                array_push($rows, $row);
+            }
+           }
+           else{
+            array_push($rows, $row);
+           }
+
+       }
        
       return($rows);
         $titles = Title::where('company_id', '=', $this->user->company_id)->get();
