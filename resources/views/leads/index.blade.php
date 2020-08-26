@@ -49,7 +49,7 @@
                         </thead>
                         <tbody>
                             @foreach($rows as $index => $row)
-                           
+                           @if($row->latestLog->todo_status_id==1 || $row->latestLog->todo_status_id==3 || $row->latestLog->todo_status_id==4 || $row->latestLog->todo_status_id==null)
                             <tr>
                                 <td>{{$index+1}}</td>
                                 {{--<th scope="row"><img src="@if($row->image){{ asset('uploads/')}}/{{ $row->image }} @else {{ asset('assets/img/default-user.gif')}} @endif" alt=""></th>--}}
@@ -83,7 +83,7 @@
                                 </form>
                                 </td>
                             </tr>
-                          
+                          @endif
                             @endforeach
                         </tbody>
                     </table>
