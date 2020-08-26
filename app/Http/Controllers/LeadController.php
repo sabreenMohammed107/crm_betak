@@ -68,8 +68,7 @@ class LeadController extends Controller
             ->where('company_id', '=', $this->user->company_id)
             ->orderBy("created_at", "Desc")
             ->with(['latestLog' => function ($q) {
-                $q->where('todo_status_id','=', 1);
-              
+                $q->whereNOTIn('todo_status_id', [1, 3, 4]);
                     }])->orWhereDoesntHave('latestLog')->get();
        
        
