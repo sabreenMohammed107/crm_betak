@@ -32,9 +32,10 @@
                                         ?>
                                     {{ date_format($date,"d-m-Y") }} </td>
                                     <td style="width: 30%;">
-                                    {{$row->activity->last()->notes ?? '' }} </td>
-                                <td style="width: 30%;">
-                                    {!! $row->activity->last()->service->first()->text ?? '' !!} </td>
+                                    {{ $row->activity->last()->service->first()->text ?? '' }} </td>
+                                    <td style="width: 30%;">
+                                    {!! $row->activity->last()->notes ?? '' !!} </td>
+                              
                                 <td> @if($row->createdBy)
                                     {{$row->activity->last()->createdBy->name ?? ''}}
                                     @endif
