@@ -354,6 +354,7 @@
 
 
 
+                                    <input type="hidden"  value="{{ Auth::user()->id }}" name="created_by">
 
 
                                     <div class="input-group d-flex justify-content-end text-center">

@@ -318,6 +318,7 @@
                                     <textarea name="notes" id="" rows="10" class=" form-control editable">{{$activity->notes}}</textarea>
                                 </div>
                             </div>
+                            <input type="hidden"  value="{{ Auth::user()->id }}" name="created_by">
 
                             <div class="col-md-5">
                                 <div class="form-group d-flex">

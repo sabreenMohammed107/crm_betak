@@ -413,8 +413,7 @@ class LeadController extends Controller
             'activity_date' => Carbon::parse($request->input('activity_date')),
             'max_todo_date' => Carbon::parse($request->input('max_todo_date')),
             'facebook_url' => $request->input('facebook_url'),
-
-
+            'created_by' => $request->input('created_by'),
             'notes' => $request->input('notes'),
 
 
@@ -531,7 +530,7 @@ class LeadController extends Controller
             'activity_date' => Carbon::parse($request->input('activity_date')),
             'max_todo_date' => Carbon::parse($request->input('max_todo_date')),
             'facebook_url' => $request->input('facebook_url'),
-
+            'created_by' => $request->input('created_by'),
 
             'notes' => $request->input('notes'),
 
