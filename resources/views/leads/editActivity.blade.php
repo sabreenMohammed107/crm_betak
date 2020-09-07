@@ -303,7 +303,7 @@
                                 <div class="  col-sm-6 col-md-5  d-flex">
                                         <label for="name"> created by</label>
                                         <div class="input-group">
-                                            <input type="text"  readonly value="@if($row->createdBy){{$row->createdBy->name}} @endif" name="created_by_user" class="form-control" placeholder="No Created User">                                            <div class="col-md-6">
+                                            <input type="text"  readonly value="@if($activity->createdBy){{$activity->createdBy->name}} @endif" name="created_by_user" class="form-control" placeholder="No Created User">                                            <div class="col-md-6">
 
 
                                         </div>

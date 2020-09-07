@@ -133,7 +133,7 @@
                         ?>
                       {{ date_format($date,"d-m-Y") }}</td>
                     <td>{{$activity->status->name ?? ''}}</td>
-                    <td>@if($row->createdBy){{$row->createdBy->name}} @endif</td>
+                    <td>@if($activity->createdBy){{$activity->createdBy->name}} @endif</td>
 
                     <td>{{$activity->notes}}</td>
                     <!-- <td>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Asperiores nobis hic sint necessitatibus autem velit in deserunt est animi. Ipsa earum quos obcaecati exercitationem soluta natus explicabo ducimus illo dolorem.</td> -->
