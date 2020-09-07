@@ -33,7 +33,7 @@
                                 <td style="width: 30%;">
                                     {!! $row->activity->last()->notes ?? '' !!} </td>
                                 <td> @if($row->createdBy)
-                                    {{$row->activity->last()->createdBy->name}}
+                                    {{$row->activity->last()->createdBy->name ?? ''}}
                                     @endif
                                 </td>
 
