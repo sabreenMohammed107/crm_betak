@@ -7,6 +7,7 @@
                                 <th scope="col">Primary Mobile</th>
 
                                 <th scope="col">Last Activity Date </th>
+                                <th scope="col">Service </th>
                                 <th scope="col">Last Activity Notes </th>
                                 <th scope="col">Created By</th>
                                 <!-- <th scope="col">Todo Status</th> -->
@@ -30,8 +31,10 @@
                                         }
                                         ?>
                                     {{ date_format($date,"d-m-Y") }} </td>
+                                    <td style="width: 30%;">
+                                    {{$row->activity->last()->notes ?? '' }} </td>
                                 <td style="width: 30%;">
-                                    {!! $row->activity->last()->notes ?? '' !!} </td>
+                                    {!! $row->activity->last()->service->first()->text ?? '' !!} </td>
                                 <td> @if($row->createdBy)
                                     {{$row->activity->last()->createdBy->name ?? ''}}
                                     @endif
