@@ -32,7 +32,9 @@
                                         ?>
                                     {{ date_format($date,"d-m-Y") }} </td>
                                     <td style="width: 30%;">
-                                    {{ $row->activity->last()->service->first()->text ?? '' }} </td>
+                                    @if($row->activity->last())
+                                    {{ $row->activity->last()->service->first()->text ?? '' }}
+                                    @endif </td>
                                     <td style="width: 30%;">
                                     {!! $row->activity->last()->notes ?? '' !!} </td>
                               
