@@ -65,7 +65,7 @@ class LeadController extends Controller
         }else{
             $xx = $this->object::where('contact_type', '=', 0)
             ->where('company_id', '=', $this->user->company_id)
-            ->where('assigned_to',8)->orderBy("created_at", "Desc")
+            ->where('assigned_to','=',8)->orderBy("created_at", "Desc")
             ->with('latestLog')->orWhereDoesntHave('latestLog')->get();  
         }
        
