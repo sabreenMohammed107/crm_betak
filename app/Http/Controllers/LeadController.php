@@ -101,11 +101,24 @@ $yassId=$this->user->id;
     {
         $all = $request->input('action1');
         $rows = array();
-        $xx = $this->object::where('contact_type', '=', 0)
-        ->where('company_id', '=', $this->user->company_id)
-        ->orderBy("created_at", "Desc")
-        ->with('latestLog')->orWhereDoesntHave('latestLog')->get();
-       
+        $yassId=$this->user->id;
+        if ($this->user->role->name=='admin'){
+            $xx = $this->object::where('contact_type', '=', 0)
+            ->where('company_id', '=', $this->user->company_id)
+            ->orderBy("created_at", "Desc")
+            ->with('latestLog')->orWhereDoesntHave('latestLog')->get();
+        }else{
+            $xx = $this->object::where('contact_type', '=', 0)
+            ->where('company_id', '=', $this->user->company_id)
+           
+            ->whereHas('activity', function($query) use($yassId){
+                $query->where('assigned_to', $yassId);
+
+            })
+
+            ->orderBy("created_at", "Desc")
+            ->with('latestLog')->orWhereDoesntHave('latestLog')->get();  
+        }
         if($all==0){
             foreach ($xx as $row) {
                 if (isset($row->latestLog['todo_status_id'])) {
