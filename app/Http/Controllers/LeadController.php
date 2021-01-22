@@ -56,10 +56,19 @@ class LeadController extends Controller
     public function index()
     {
         $rows = array();
-        $xx = $this->object::where('contact_type', '=', 0)
+
+        if ($this->user->role->name=='admin'){
+            $xx = $this->object::where('contact_type', '=', 0)
             ->where('company_id', '=', $this->user->company_id)
             ->orderBy("created_at", "Desc")
             ->with('latestLog')->orWhereDoesntHave('latestLog')->get();
+        }else{
+            $xx = $this->object::where('contact_type', '=', 0)
+            ->where('company_id', '=', $this->user->company_id)
+            ->where('assigned_to',$this->user->id)->orderBy("created_at", "Desc")
+            ->with('latestLog')->orWhereDoesntHave('latestLog')->get();  
+        }
+       
         foreach ($xx as $row) {
             if (isset($row->latestLog['todo_status_id'])) {
                 if ($row->latestLog['todo_status_id'] == 1 || $row->latestLog['todo_status_id'] == 3 || $row->latestLog['todo_status_id'] == 4) {
