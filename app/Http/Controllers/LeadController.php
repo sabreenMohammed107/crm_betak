@@ -56,7 +56,7 @@ class LeadController extends Controller
     public function index()
     {
         $rows = array();
-
+$yassId=$this->user->id;
         if ($this->user->role->name=='admin'){
             $xx = $this->object::where('contact_type', '=', 0)
             ->where('company_id', '=', $this->user->company_id)
@@ -65,7 +65,13 @@ class LeadController extends Controller
         }else{
             $xx = $this->object::where('contact_type', '=', 0)
             ->where('company_id', '=', $this->user->company_id)
-            ->where('assigned_to','=',8)->orderBy("created_at", "Desc")
+           
+            ->whereHas('activity', function($query) use($yassId){
+                $query->where('assigned_to', $yassId);
+
+            })
+
+            ->orderBy("created_at", "Desc")
             ->with('latestLog')->orWhereDoesntHave('latestLog')->get();  
         }
        
@@ -75,7 +81,8 @@ class LeadController extends Controller
 
                     array_push($rows, $row);
                 }
-            } else {
+            }
+             else {
                 array_push($rows, $row);
             }
         }
