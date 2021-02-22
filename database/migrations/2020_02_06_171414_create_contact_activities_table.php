@@ -27,7 +27,11 @@ class CreateContactActivitiesTable extends Migration
             $table->integer('todo_status_id')->unsigned()->nullable();
             $table->integer('todo_solved_by')->unsigned()->nullable();
             $table->dateTime('max_todo_date', 6)->nullable();
+            $table->dateTime('followup_date', 6)->nullable();
+            $table->dateTime('meeting_date', 6)->nullable();
+            $table->dateTime('discount_offer_date', 6)->nullable();
             $table->integer('activity_source_id')->unsigned()->nullable();
+            $table->integer('funnel_id')->unsigned()->nullable();
             $table->string('notes', 1000)->nullable();
             $table->timestamps();
         });

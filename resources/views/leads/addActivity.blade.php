@@ -296,7 +296,49 @@
                                 <hr>
                                 <h1 style="background-color: #000000;color:#fff">Activity notes</h1>
                                 <div class="row justify-content-between Services_Container">
+                                       <!-- add new Columns -->
+                                       <div class="  col-sm-6 col-md-5  d-flex">
+                                        <label for="name">Followup date</label>
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="fas fa-calendar"></i></span>
+                                            </div>
+                                            <input type="text" name="followup_date" class="form-control" data-toggle="datepicker">
+                                        </div>
+                                    </div>
                                     <div class="  col-sm-6 col-md-5  d-flex">
+                                        <label for="name">Meeting date</label>
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="fas fa-calendar"></i></span>
+                                            </div>
+                                            <input type="text" name="meeting_date" class="form-control" data-toggle="datepicker">
+                                        </div>
+                                    </div>
+                                    <div class="  col-sm-6 col-md-5  d-flex">
+                                        <label for="name">Discount Offer date</label>
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="fas fa-calendar"></i></span>
+                                            </div>
+                                            <input type="text" name="discount_offer_date" class="form-control" data-toggle="datepicker">
+                                        </div>
+                                    </div>
+                                    <div class="  col-sm-6 col-md-5  d-flex">
+                                        <label for="name">Funnel Level</label>
+                                        <div class="input-group">
+                                            <select name="funnel_id" id="" class="form-control">
+                                                <option value=""> </option>
+                                                @foreach ($funnels as $data)
+                                                <option value='{{$data->id}}'>
+                                                    {{ $data->name }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <!-- End Adding Data -->
+                                    <div class="  col-sm-6 col-md-5  d-flex">
+
                                         <label for="name"> created by</label>
                                         <div class="input-group">
                                             <input type="text" readonly value="{{ Auth::user()->name }}" name="created_by" class="form-control" placeholder="No Created User">

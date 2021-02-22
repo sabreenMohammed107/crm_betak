@@ -1,17 +1,22 @@
-<table id="courseEval" class="dattable table table-striped thead-dark  w-100">
+<table id="courseEval" class="dattable table table-striped thead-dark "  style="width:100%">
                         <thead>
                             <tr>
-                                <th scope="col">#</th>
-                                <!-- <th scope="col"></th> -->
-                                <th scope="col">name</th>
-                                <th scope="col">Primary Mobile</th>
+                                <th >#</th>
+                                <!-- <th ></th> -->
+                                <th >name</th>
+                                <th >Primary Mobile</th>
 
-                                <th scope="col">Last Activity Date </th>
-                                <th scope="col">Service </th>
-                                <th scope="col">Last Activity Notes </th>
-                                <th scope="col">Created By</th>
-                                <!-- <th scope="col">Todo Status</th> -->
-                                <!-- <th scope="col">Created By</th> -->
+                                <th >Last Activity Date </th>
+                                <th >Service </th>
+                                <th style="display: inline-block;width:200px !important;" >Last Activity Notes </th>
+                                <th >Last  Meeting </th>
+                                <th >Last  Dis-Date </th>
+                                <th >Last  Followup </th>
+                                <th >Last Funnel </th>
+
+                                <th >Created By</th>
+                                <!-- <th >Todo Status</th> -->
+                                <!-- <th >Created By</th> -->
 
                                 <th></th>
                             </tr>
@@ -31,13 +36,41 @@
                                         }
                                         ?>
                                     {{ date_format($date,"d-m-Y") }} </td>
-                                    <td style="width: 30%;">
+                                    <td >
                                     @if($row->activity->last())
                                     {{ $row->activity->last()->service->first()->text ?? '' }}
                                     @endif </td>
-                                    <td style="width: 30%;">
+                                    <td style="width: 100%;display:inline-block">
                                     {!! $row->activity->last()->notes ?? '' !!} </td>
-                              
+                              <!-- new -->
+                                    <td> <?php
+                                        $date1 = now();
+                                        if ($row->activity->last()) {
+                                            $date1 = date_create($row->activity->last()->meeting_date);
+                                        }
+                                        ?>
+                                    {{ date_format($date1,"d-m-Y") }} </td>
+                                    <td> <?php
+                                        $date2 = now();
+                                        if ($row->activity->last()) {
+                                            $date2 = date_create($row->activity->last()->discount_offer_date);
+                                        }
+                                        ?>
+                                    {{ date_format($date2,"d-m-Y") }} </td>
+                                    <td> <?php
+                                        $date3 = now();
+                                        if ($row->activity->last()) {
+                                            $date3 = date_create($row->activity->last()->followup_date);
+                                        }
+                                        ?>
+                                    {{ date_format($date3,"d-m-Y") }} </td>
+                                    <td> @if($row->activity->last())
+                                    {{$row->activity->last()->funnel->name ?? ''}}
+                                    @endif
+                                </td>
+
+                                    <!-- End -->
+
                                 <td> @if($row->createdBy)
                                     {{$row->activity->last()->createdBy->name ?? ''}}
                                     @endif

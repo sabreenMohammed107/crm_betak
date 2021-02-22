@@ -20,7 +20,7 @@ class Activityrelation extends Migration
             $table->foreign('status_id')->references('id')->on('statuses');
             $table->foreign('assigned_to')->references('id')->on('users');
             $table->foreign('todo_solved_by')->references('id')->on('users');
-            
+            $table->foreign('funnel_id')->references('id')->on('funnels');
             $table->foreign('activity_source_id')->references('id')->on('activity_sources');
         });
 

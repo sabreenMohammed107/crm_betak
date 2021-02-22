@@ -219,6 +219,11 @@ function getAll(){
         },
         
     });
+    $(document).ready(function() {
+    $('#courseEval').DataTable( {
+        "scrollX": true
+    } );
+} );
 }
 </script>
 @endsection

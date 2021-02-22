@@ -16,6 +16,7 @@ use App\Status;
 use App\Activity;
 use App\Service;
 use App\Activity_service;
+use App\Funnel;
 use App\todo_status;
 use File;
 use DB;
@@ -430,7 +431,8 @@ $yassId=$this->user->id;
         $activities = Activity::where('company_id', '=', $this->user->company_id)->get();
         $sourses = Activity_source::where('company_id', '=', $this->user->company_id)->get();
         $todoStatus = todo_status::where('company_id', '=', $this->user->company_id)->get();
-        return view($this->viewName . 'addActivity', compact('row', 'sourses', 'activities', 'todoStatus', 'status', 'asigns', 'services1', 'solved'));
+        $funnels=Funnel::all();
+        return view($this->viewName . 'addActivity', compact('row','funnels', 'sourses', 'activities', 'todoStatus', 'status', 'asigns', 'services1', 'solved'));
     }
     public function saveActivity(Request $request)
     {
@@ -444,9 +446,19 @@ $yassId=$this->user->id;
             'facebook_url' => $request->input('facebook_url'),
             'created_by' => $request->input('created_by'),
             'notes' => $request->input('notes'),
+            //new Columns
+            'followup_date' => Carbon::parse($request->input('followup_date')),
+            'meeting_date' => Carbon::parse($request->input('meeting_date')),
+            'discount_offer_date' => Carbon::parse($request->input('discount_offer_date')),
+            //end New
 
 
         ];
+
+        if ($request->input('funnel_id')) {
+
+            $data['funnel_id'] = $request->input('funnel_id');
+        }
 
         if ($request->input('activity_type_id')) {
 
@@ -526,7 +538,8 @@ $yassId=$this->user->id;
         $todoStatus = todo_status::where('company_id', '=', $this->user->company_id)->get();
         $tags = $activity->service;
         // dd($tags[0]['text']);
-        return view($this->viewName . 'editActivity', compact('activity', 'tags', 'row', 'todoStatus', 'sourses', 'activities', 'status', 'asigns', 'services1', 'solved'));
+        $funnels=Funnel::all();
+        return view($this->viewName . 'editActivity', compact('activity','funnels', 'tags', 'row', 'todoStatus', 'sourses', 'activities', 'status', 'asigns', 'services1', 'solved'));
     }
     public function deleteActivity($id)
     {
@@ -564,7 +577,19 @@ $yassId=$this->user->id;
             'notes' => $request->input('notes'),
 
 
-        ];
+           //new Columns
+           'followup_date' => Carbon::parse($request->input('followup_date')),
+           'meeting_date' => Carbon::parse($request->input('meeting_date')),
+           'discount_offer_date' => Carbon::parse($request->input('discount_offer_date')),
+           //end New
+
+
+       ];
+
+       if ($request->input('funnel_id')) {
+
+           $data['funnel_id'] = $request->input('funnel_id');
+       }
 
         if ($request->input('activity_type_id')) {
 

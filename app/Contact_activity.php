@@ -9,6 +9,7 @@ class Contact_activity extends Model
     protected $fillable = [
         'contact_id','activity_type_id','activity_date','ingoing_outgoining_flag','activity_type','status_id','priority',
         'facebook_url','assigned_to','todo_status_id','todo_solved_by','created_by','max_todo_date','activity_source_id','notes',
+        'followup_date','meeting_date','discount_offer_date','funnel_id'
     ];
 
     public function service()
@@ -16,6 +17,11 @@ class Contact_activity extends Model
         return $this->belongsToMany(Service::class, 'activity_services', 'activity_id','service_id');
       
     }
+
+    public function funnel()
+    {
+        return $this->belongsTo('App\Funnel','funnel_id');
+    } 
     public function createdBy()
     {
         return $this->belongsTo('App\User','created_by');
