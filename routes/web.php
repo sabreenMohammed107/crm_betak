@@ -53,6 +53,16 @@ Route::get('edit-lead-activity/{id}', 'LeadController@editActivity')->name('edit
 Route::post('update-lead-activity', 'LeadController@updateActivity')->name('update-lead-activity');
 Route::get('fetch_allLead', 'LeadController@fetch_allLead')->name('fetch_allLead');
 
+/*--------------------todoList-----------------------*/
+Route::resource('todoList', 'TodoList');
+Route::get('add-todoList-activity/{id}', 'TodoList@addActivity')->name('add-todoList-activity');
+Route::post('savetodoListActivity', 'TodoList@saveActivity')->name('savetodoListActivity');
+Route::get('dynamicServicetodoList/fetch', 'TodoList@dynamicService')->name('dynamicServicetodoList.fetch');
+Route::delete('delete-todoList-activity/{id}', 'TodoList@deleteActivity')->name('delete-todoList-activity');
+Route::get('edit-todoList-activity/{id}', 'TodoList@editActivity')->name('edit-todoList-activity');
+Route::post('update-todoList-activity', 'TodoList@updateActivity')->name('update-todoList-activity');
+Route::get('fetch_alltodoList', 'TodoList@fetch_allLead')->name('fetch_alltodoList');
+
 /*--------------------fqa-----------------------*/
 Route::resource('fqa', 'FqaController');
 

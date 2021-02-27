@@ -9,12 +9,12 @@
                                 <th >Last Activity Date </th>
                                 <th >Service </th>
                                 <th style="display: inline-block;width:200px !important;" >Last Activity Notes </th>
-                                <th >Last  Meeting </th>
+                                <th >ToDo Date </th>
                                 <th >Discount-Date </th>
                                 <th >Next  Followup </th>
                                 <th >Last Funnel </th>
 
-                                <th >Created By</th>
+                                <!-- <th >Created By</th> -->
                                 <!-- <th >Todo Status</th> -->
                                 <!-- <th >Created By</th> -->
 
@@ -46,7 +46,7 @@
                                     <td> <?php
                                         $date1 = now();
                                         if ($row->activity->last()) {
-                                            $date1 = date_create($row->activity->last()->meeting_date);
+                                            $date1 = date_create($row->activity->last()->max_todo_date);
                                         }
                                         ?>
                                     {{ date_format($date1,"d-m-Y") }} </td>
@@ -71,15 +71,12 @@
 
                                     <!-- End -->
 
-                                <td> @if($row->createdBy)
-                                    {{$row->activity->last()->createdBy->name ?? ''}}
-                                    @endif
-                                </td>
+                               
 
                                 <td>
-                                <a href="{{ route('lead.show',$row->id) }}" style="padding: 5px;background:light"><i class="fa fa-file" aria-hidden="true"></i> </a>
+                                <a href="{{ route('todoList.show',$row->id) }}" style="padding: 5px;background:light"><i class="fa fa-file" aria-hidden="true"></i> </a>
 
-                                    <a href="{{ route('lead.edit',$row->id) }}"  style="padding: 5px;background:light"><i class="fas fa-pencil-alt " ></i></a>
+                                   {{-- <a href="{{ route('lead.edit',$row->id) }}"  style="padding: 5px;background:light"><i class="fas fa-pencil-alt " ></i></a>
 
                                 <a href="#" onclick="destroy('this Lead', '{{$row->id}}')" style="padding: 5px;background:light"><i class="far fa-trash-alt"></i> </a>
 
@@ -87,7 +84,7 @@
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit" value=""></button>
-                                </form>
+                                </form> --}}
                                 </td>
                             </tr>
                           

@@ -51,15 +51,26 @@
     <!--  Clients  -->
     <!-- Leads  -->
     <li class="menu-item">
-        <a href="#" class="has-chevron" data-toggle="collapse" data-target="#callsdropdown" aria-expanded="false" aria-controls="callsdropdown">
+        <a href="#" class="has-chevron" data-toggle="collapse" data-target="#callsdropdown1" aria-expanded="false" aria-controls="callsdropdown">
         <span><i class="material-icons fs-16">call</i>{{ __('links.leads') }}</span>
       </a>
-        <ul id="callsdropdown" class="collapse" aria-labelledby="basic-elements" data-parent="#side-nav-accordion">
+        <ul id="callsdropdown1" class="collapse" aria-labelledby="basic-elements" data-parent="#side-nav-accordion">
           <li> <a href="{{ route('lead.index')}}">{{ __('links.leads') }}</a> </li>
          
         </ul>
       </li>
     <!--  Leads  -->
+    <!-- Todo List -->
+    <li class="menu-item">
+        <a href="#" class="has-chevron" data-toggle="collapse" data-target="#callsdropdown" aria-expanded="false" aria-controls="callsdropdown">
+        <span><i class="material-icons fs-16">call</i>ToDo List</span>
+      </a>
+        <ul id="callsdropdown" class="collapse" aria-labelledby="basic-elements" data-parent="#side-nav-accordion">
+          <li> <a href="{{ route('todoList.index')}}">ToDo List</a> </li>
+         
+        </ul>
+      </li>
+      <!-- Todo List -->
     <!-- Users  -->
     @if (Auth::user()->role->name=='admin')
     <li class="menu-item">
