@@ -452,15 +452,15 @@ $yassId=$this->user->id;
         ];
         if ($request->input('followup_date')) {
 
-            $data['followup_date'] = $request->input('followup_date');
+            $data['followup_date'] = Carbon::parse($request->input('followup_date'));
         }
         if ($request->input('meeting_date')) {
 
-            $data['meeting_date'] = $request->input('meeting_date');
+            $data['meeting_date'] =  Carbon::parse($request->input('meeting_date'));
         }
         if ($request->input('discount_offer_date')) {
 
-            $data['discount_offer_date'] = $request->input('discount_offer_date');
+            $data['discount_offer_date'] =  Carbon::parse($request->input('discount_offer_date'));
         }
 
         if ($request->input('funnel_id')) {
@@ -590,15 +590,15 @@ $yassId=$this->user->id;
        ];
        if ($request->input('followup_date')) {
 
-        $data['followup_date'] = $request->input('followup_date');
+        $data['followup_date'] =  Carbon::parse($request->input('followup_date'));
     }
     if ($request->input('meeting_date')) {
 
-        $data['meeting_date'] = $request->input('meeting_date');
+        $data['meeting_date'] =  Carbon::parse($request->input('meeting_date'));
     }
     if ($request->input('discount_offer_date')) {
 
-        $data['discount_offer_date'] = $request->input('discount_offer_date');
+        $data['discount_offer_date'] =  Carbon::parse($request->input('discount_offer_date'));
     }
 
        if ($request->input('funnel_id')) {
