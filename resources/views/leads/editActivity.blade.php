@@ -308,7 +308,7 @@
                                             </div>
                                             <?php $followup_date = date_create($activity->followup_date) ?>
                                            
-                                            <input type="text" value="{{ date_format($followup_date,'d-m-Y') }}" name="followup_date" class="form-control" data-toggle="datepicker">
+                                            <input type="text" @if($activity->followup_date)  value="{{ date_format($followup_date,'d-m-Y') }}" @else value="" @endif name="followup_date" class="form-control" data-toggle="datepicker">
                                         </div>
                                     </div>
                                     <div class="  col-sm-6 col-md-5  d-flex">
@@ -318,7 +318,7 @@
                                                 <span class="input-group-text"><i class="fas fa-calendar"></i></span>
                                             </div>
                                             <?php $meeting_date = date_create($activity->meeting_date) ?>
-                                            <input type="text" value="{{ date_format($meeting_date,'d-m-Y') }}" name="meeting_date" class="form-control" data-toggle="datepicker">
+                                            <input type="text" @if($activity->meeting_date) value="{{ date_format($meeting_date,'d-m-Y') }}" @else value="" @endif name="meeting_date" class="form-control" data-toggle="datepicker">
                                         </div>
                                     </div>
                                     <div class="  col-sm-6 col-md-5  d-flex">
@@ -327,9 +327,10 @@
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text"><i class="fas fa-calendar"></i></span>
                                             </div>
-                                            <?php $discount_offer_date = date_create($activity->discount_offer_date) ?>
-                                            <input type="text" value="{{ date_format($discount_offer_date,'d-m-Y') }}" name="discount_offer_date" class="form-control" data-toggle="datepicker">
-                                        </div>
+                                            <?php $discount_offer_date = date_create($activity->discount_offer_date) ;
+                                            ?>
+                                            <input type="text" @if($activity->discount_offer_date) value="{{ date_format($discount_offer_date,'d-m-Y') }}" @else value="" @endif name="discount_offer_date" class="form-control"  data-toggle="datepicker" >
+                                      </div>
                                     </div>
                                     <div class="  col-sm-6 col-md-5  d-flex">
                                         <label for="name">Funnel Level</label>

@@ -588,12 +588,16 @@ $yassId=$this->user->id;
        
 
        ];
+     
        if ($request->input('followup_date')) {
 
         $data['followup_date'] =Carbon::parse($request->input('followup_date'));
+
     }else{
+
         $data['followup_date'] =null;
     }
+
     if ($request->input('meeting_date')) {
 
         $data['meeting_date'] = Carbon::parse($request->input('meeting_date'));
