@@ -30,40 +30,65 @@
                                 <td>{{$row->name}}</td>
                                 <td>{{$row->primary_mobile}}</td>
                                 <td> <?php
-                                        $date = "";
-                                        if ($row->activity->last()) {
-                                            $date = date_create($row->activity->last()->activity_date);
-                                        }
-                                        ?>
-                                    @if($date){{ date_format($date,"d-m-Y") }}@endif </td>
-                                    <td >
-                                    @if($row->activity->last())
-                                    {{ $row->activity->last()->service->first()->text ?? '' }}
-                                    @endif </td>
-                                    <td style="width: 100%;display:inline-block">
-                                    {!! $row->activity->last()->notes ?? '' !!} </td>
-                              <!-- new -->
-                                    <td> <?php
-                                        $date1 = "";
-                                        if ($row->activity->last()) {
-                                            $date1 = date_create($row->activity->last()->max_todo_date);
-                                        }
-                                        ?>
-                                   @if($date1) {{ date_format($date1,"d-m-Y") }}@endif </td>
-                                    <td> <?php
-                                        $date2 = "";
-                                        if ($row->activity->last()) {
-                                            $date2 = date_create($row->activity->last()->discount_offer_date);
-                                        }
-                                        ?>
-                                    @if($date2){{ date_format($date2,"d-m-Y") }}@endif </td>
-                                    <td> <?php
-                                        $date3 = "";
-                                        if ($row->activity->last()) {
-                                            $date3 = date_create($row->activity->last()->followup_date);
-                                        }
-                                        ?>
-                                    @if($date3){{ date_format($date3,"d-m-Y") }}@endif </td>
+                    $date = null;
+                    if ($row->activity->last()) {
+                        $date = date_create($row->activity->last()->activity_date);
+                        if ($row->activity->last()->activity_date) {
+                            echo date_format($date,"d-m-Y");
+                        } else {
+                            echo " ";
+                        }
+                    }
+                    ?>
+                @if($date){{ date_format($date,"d-m-Y") }}@endif </td>
+            <td>
+                @if($row->activity->last())
+                {{ $row->activity->last()->service->first()->text ?? '' }}
+                @endif
+            </td>
+            <td style="width: 100%;display:inline-block">
+                {!! $row->activity->last()->notes ?? '' !!} </td>
+            <!-- new -->
+            <td> <?php
+                    $date1 = null;
+                    if ($row->activity->last()) {
+                        $date1 = date_create($row->activity->last()->meeting_date);
+                        if ($row->activity->last()->meeting_date) {
+                            echo date_format($date1,"d-m-Y");
+                        } else {
+                            echo " ";
+                        }
+                    }
+
+                    ?>
+
+            </td>
+            <td> <?php
+                    $date2 = null;
+                    if ($row->activity->last()) {
+                        $date2 = date_create($row->activity->last()->discount_offer_date);
+                        if ($row->activity->last()->discount_offer_date) {
+                            echo date_format($date2,"d-m-Y");
+                        } else {
+                            echo " ";
+                        }
+                    }
+
+                    ?>
+
+            </td>
+            <td> <?php
+                    $date3 = null;
+                    if ($row->activity->last()) {
+                        $date3 = date_create($row->activity->last()->followup_date);
+                        if ($row->activity->last()->followup_date) {
+                            echo date_format($date3,"d-m-Y");
+                        } else {
+                            echo " ";
+                        }
+                    }
+                    ?>
+                </td>
                                     <td> @if($row->activity->last())
                                     {{$row->activity->last()->funnel->name ?? ''}}
                                     @endif
