@@ -30,12 +30,12 @@
                                 <td>{{$row->name}}</td>
                                 <td>{{$row->primary_mobile}}</td>
                                 <td> <?php
-                                        $date = now();
+                                        $date = "";
                                         if ($row->activity->last()) {
                                             $date = date_create($row->activity->last()->activity_date);
                                         }
                                         ?>
-                                    {{ date_format($date,"d-m-Y") }} </td>
+                                    @if($date){{ date_format($date,"d-m-Y") }}@endif </td>
                                     <td >
                                     @if($row->activity->last())
                                     {{ $row->activity->last()->service->first()->text ?? '' }}
@@ -44,26 +44,26 @@
                                     {!! $row->activity->last()->notes ?? '' !!} </td>
                               <!-- new -->
                                     <td> <?php
-                                        $date1 = now();
+                                        $date1 = "";
                                         if ($row->activity->last()) {
                                             $date1 = date_create($row->activity->last()->max_todo_date);
                                         }
                                         ?>
-                                    {{ date_format($date1,"d-m-Y") }} </td>
+                                   @if($date1) {{ date_format($date1,"d-m-Y") }}@endif </td>
                                     <td> <?php
-                                        $date2 = now();
+                                        $date2 = "";
                                         if ($row->activity->last()) {
                                             $date2 = date_create($row->activity->last()->discount_offer_date);
                                         }
                                         ?>
-                                    {{ date_format($date2,"d-m-Y") }} </td>
+                                    @if($date2){{ date_format($date2,"d-m-Y") }}@endif </td>
                                     <td> <?php
-                                        $date3 = now();
+                                        $date3 = "";
                                         if ($row->activity->last()) {
                                             $date3 = date_create($row->activity->last()->followup_date);
                                         }
                                         ?>
-                                    {{ date_format($date3,"d-m-Y") }} </td>
+                                    @if($date3){{ date_format($date3,"d-m-Y") }}@endif </td>
                                     <td> @if($row->activity->last())
                                     {{$row->activity->last()->funnel->name ?? ''}}
                                     @endif
