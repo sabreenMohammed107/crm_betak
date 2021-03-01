@@ -590,15 +590,22 @@ $yassId=$this->user->id;
        ];
        if ($request->input('followup_date')) {
 
-        $data['followup_date'] =  Carbon::parse($request->input('followup_date'));
+        $data['followup_date'] =Carbon::parse($request->input('followup_date'));
+    }else{
+        $data['followup_date'] =null;
     }
     if ($request->input('meeting_date')) {
 
-        $data['meeting_date'] =  Carbon::parse($request->input('meeting_date'));
+        $data['meeting_date'] = Carbon::parse($request->input('meeting_date'));
+    }
+    else{
+        $data['meeting_date'] =null;
     }
     if ($request->input('discount_offer_date')) {
 
         $data['discount_offer_date'] =  Carbon::parse($request->input('discount_offer_date'));
+    }else{
+        $data['discount_offer_date'] =null;
     }
 
        if ($request->input('funnel_id')) {
